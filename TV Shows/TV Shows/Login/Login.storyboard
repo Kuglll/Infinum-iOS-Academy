@@ -51,10 +51,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpG-pk-KP6">
-                                <rect key="frame" x="168" y="418" width="78" height="24"/>
+                                <rect key="frame" x="155" y="418" width="105" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
-                                <state key="normal" title="Button" image="likeIcon">
+                                <state key="normal" title="Increment" image="likeIcon">
                                     <color key="titleColor" systemColor="systemGroupedBackgroundColor"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
