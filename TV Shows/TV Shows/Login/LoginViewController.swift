@@ -10,7 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-
     @IBOutlet weak var counterLabel: UILabel!
     var x: Int = 0
     
@@ -19,9 +18,21 @@ class LoginViewController: UIViewController {
         self.counterLabel.text = String(x)
     }
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBAction func startButton(_ sender: Any) {
+        activityIndicator.startAnimating()
+    }
+    
+    
+    @IBAction func stopButton(_ sender: Any) {
+        activityIndicator.stopAnimating()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
     }
 
 }
