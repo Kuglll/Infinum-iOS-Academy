@@ -16,16 +16,32 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashTopLeftIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OL1-dl-wFn">
+                                <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashTopRightIcon" translatesAutoresizingMaskIntoConstraints="NO" id="7dy-uL-ucp">
+                                <rect key="frame" x="212" y="0.0" width="202" height="266"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="PrimaryColor"/>
+                        <constraints>
+                            <constraint firstItem="OL1-dl-wFn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7Ro-7x-H1j"/>
+                            <constraint firstItem="7dy-uL-ucp" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="DuX-Qd-4Gf"/>
+                            <constraint firstItem="OL1-dl-wFn" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fR7-HE-VNQ"/>
+                            <constraint firstItem="7dy-uL-ucp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="nwb-fF-S7v"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
+        <image name="SplashTopLeftIcon" width="140" height="100"/>
+        <image name="SplashTopRightIcon" width="202" height="266"/>
         <namedColor name="PrimaryColor">
             <color red="0.32156862745098042" green="0.21176470588235294" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
