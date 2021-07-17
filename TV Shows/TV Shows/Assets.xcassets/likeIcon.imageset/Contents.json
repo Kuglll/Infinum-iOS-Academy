@@ -2,18 +2,7 @@
   "images" : [
     {
       "filename" : "ic-top-rated-selected.pdf",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "ic-top-rated-selected-1.pdf",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "ic-top-rated-selected-2.pdf",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "universal"
     }
   ],
   "info" : {
