@@ -96,6 +96,13 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXg-ZA-aGx">
+                                <rect key="frame" x="360" y="389" width="24" height="24"/>
+                                <state key="normal" image="PasswordInvisible"/>
+                                <connections>
+                                    <action selector="togglePasswordVisibility:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RSx-q4-fgM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="T4e-nC-qBZ"/>
                         <color key="backgroundColor" name="PrimaryColor"/>
@@ -123,8 +130,10 @@
                             <constraint firstItem="Eh9-D3-5x5" firstAttribute="leading" secondItem="T4e-nC-qBZ" secondAttribute="leading" constant="20" id="cR0-7h-kAY"/>
                             <constraint firstItem="Yl2-8C-qwd" firstAttribute="leading" secondItem="T4e-nC-qBZ" secondAttribute="leading" constant="20" id="hVi-xv-IYk"/>
                             <constraint firstItem="T4e-nC-qBZ" firstAttribute="trailing" secondItem="Eh9-D3-5x5" secondAttribute="trailing" constant="20" id="iYd-d3-cfa"/>
+                            <constraint firstItem="YXg-ZA-aGx" firstAttribute="centerY" secondItem="ZpX-R1-vyc" secondAttribute="centerY" id="ksO-Xt-N0m"/>
                             <constraint firstItem="T4e-nC-qBZ" firstAttribute="trailing" secondItem="ZpX-R1-vyc" secondAttribute="trailing" constant="35" id="lH2-cV-lQS"/>
                             <constraint firstItem="NN0-pf-z7p" firstAttribute="top" secondItem="Urk-H1-z6a" secondAttribute="bottom" constant="30" id="msO-5m-bFV"/>
+                            <constraint firstItem="T4e-nC-qBZ" firstAttribute="trailing" secondItem="YXg-ZA-aGx" secondAttribute="trailing" constant="30" id="nYu-Fh-5dY"/>
                             <constraint firstItem="iID-ku-Cil" firstAttribute="top" secondItem="QXc-Yv-s80" secondAttribute="top" id="o4I-Os-j62"/>
                             <constraint firstItem="ZpX-R1-vyc" firstAttribute="leading" secondItem="T4e-nC-qBZ" secondAttribute="leading" constant="35" id="xpJ-2U-cQ6"/>
                             <constraint firstAttribute="trailing" secondItem="iID-ku-Cil" secondAttribute="trailing" id="zem-Q0-JJO"/>
@@ -135,6 +144,7 @@
                         <outlet property="passwordTextField" destination="ZpX-R1-vyc" id="6ZJ-7u-4tW"/>
                         <outlet property="registerButton" destination="fdu-rg-0D2" id="Eiq-76-JTI"/>
                         <outlet property="rememberMeButton" destination="aIY-GQ-BVw" id="dBr-dj-6IY"/>
+                        <outlet property="togglePasswordIcon" destination="YXg-ZA-aGx" id="QFn-Ve-E0P"/>
                         <outlet property="usernameTextField" destination="y03-bl-VRe" id="VY8-sL-nNN"/>
                     </connections>
                 </viewController>
@@ -146,6 +156,7 @@
     <resources>
         <image name="CheckboxUnselected" width="24" height="24"/>
         <image name="Logo" width="35" height="39"/>
+        <image name="PasswordInvisible" width="24" height="24"/>
         <image name="SplashTopLeftIcon" width="140" height="100"/>
         <image name="SplashTopRightIcon" width="202" height="266"/>
         <namedColor name="PrimaryColor">

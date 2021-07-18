@@ -13,12 +13,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberMeButton: UIButton!
+    @IBOutlet weak var togglePasswordIcon: UIButton!
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
     var rememberMeChecked = false
-    var passwordVisible = false
 
     @IBAction func rememberMeButtonAction(_ sender: Any) {
         rememberMeChecked = !rememberMeChecked
@@ -29,6 +29,19 @@ class LoginViewController: UIViewController {
         }
     }
     
+    var passwordVisible = false
+    
+    @IBAction func togglePasswordVisibility(_ sender: Any) {
+        passwordVisible = !passwordVisible
+        if(passwordVisible){
+            togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .normal)
+            passwordTextField.isSecureTextEntry = false
+        }else {
+            togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
+            passwordTextField.isSecureTextEntry = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -36,8 +49,6 @@ class LoginViewController: UIViewController {
         styleTextFields(textFields: [usernameTextField, passwordTextField])
         styleLoginButton()
         toggleLoginAndRegisterButtons(enabled: false)
-        
-        setupPasswordEyeIcon()
     }
     
     private func styleTextFields(textFields: [UITextField]){
@@ -84,40 +95,6 @@ class LoginViewController: UIViewController {
     private func styleLoginButton(){
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
-    }
-    
-    private func setupPasswordEyeIcon(){
-        let imageIcon = UIImageView()
-        let invisibleIcon = UIImage(named: "PasswordInvisible")
-        imageIcon.image = invisibleIcon
-        
-        let contentView = UIView()
-        contentView.addSubview(imageIcon)
-        
-        contentView.frame = CGRect(x: 0, y: 0, width: invisibleIcon?.size.width ?? 0, height: invisibleIcon?.size.height ?? 0)
-        imageIcon.frame = CGRect(x: -10, y: 0, width: invisibleIcon?.size.width ?? 0, height: invisibleIcon?.size.height ?? 0)
-        
-        passwordTextField.rightView = contentView
-        passwordTextField.rightViewMode = .always
-        
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(eyeIconTapped(tapGestureRecognizer:)))
-        imageIcon.isUserInteractionEnabled = true
-        imageIcon.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    @objc private func eyeIconTapped(tapGestureRecognizer: UITapGestureRecognizer){
-        let eyeIcon = tapGestureRecognizer.view as! UIImageView
-        passwordVisible = !passwordVisible
-        
-        if(passwordVisible){
-            eyeIcon.image = UIImage(named: "PasswordVisible")
-            passwordTextField.isSecureTextEntry = false
-        } else {
-            eyeIcon.image = UIImage(named: "PasswordInvisible")
-            passwordTextField.isSecureTextEntry = true
-        }
-        
     }
 
 }
