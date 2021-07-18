@@ -22,20 +22,18 @@ class LoginViewController: UIViewController {
             self.activityIndicator.stopAnimating()
         }
     }
-
-    @IBAction func incrementButton(_ sender: Any) {
+    
+    @IBAction func incrementButton() {
         x += 1
         self.counterLabel.text = String(x)
     }
     
-    @IBAction func startButton(_ sender: Any) {
+    @IBAction func startButton() {
         activityIndicator.startAnimating()
     }
     
-    
-    @IBAction func stopButton(_ sender: Any) {
+    @IBAction func stopButton() {
         activityIndicator.stopAnimating()
     }
-    
 }
 
