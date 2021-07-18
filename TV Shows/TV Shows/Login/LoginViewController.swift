@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func incrementButton() {
         x += 1
-        self.counterLabel.text = String(x)
+        counterLabel.text = String(x)
     }
     
     @IBAction func startButton() {

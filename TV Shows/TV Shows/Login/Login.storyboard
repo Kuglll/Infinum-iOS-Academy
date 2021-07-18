@@ -36,7 +36,7 @@
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="startButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9dw-w7-5U2"/>
+                                    <action selector="startButton" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gOE-xp-EyO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMa-Lf-DeU">
@@ -47,7 +47,7 @@
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bHh-Pt-Nmq"/>
+                                    <action selector="stopButton" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XYn-5G-cO1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XpG-pk-KP6">
@@ -63,7 +63,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="incrementButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="seg-YQ-sgR"/>
+                                    <action selector="incrementButton" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pxP-OD-uh8"/>
                                 </connections>
                             </button>
                         </subviews>
