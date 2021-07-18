@@ -12,6 +12,11 @@
 		8EA3C05C26975F400042CB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3C05B26975F400042CB93 /* AppDelegate.swift */; };
 		8EA3C06526975F450042CB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EA3C06426975F450042CB93 /* Assets.xcassets */; };
 		8EA3C06826975F450042CB93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA3C06626975F450042CB93 /* LaunchScreen.storyboard */; };
+		8ECADDE926A48612008831CE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECADDE826A48612008831CE /* HomeViewController.swift */; };
+		8ECADDEB26A4862C008831CE /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ECADDEA26A4862C008831CE /* HomeStoryboard.storyboard */; };
+		8ECADDED26A487D9008831CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECADDEC26A487D9008831CE /* User.swift */; };
+		8ECADDF026A4B3FA008831CE /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECADDEF26A4B3FA008831CE /* ApiManager.swift */; };
+		8ECADDF226A4B66E008831CE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECADDF126A4B66E008831CE /* Router.swift */; };
 		AE3B56934470FB5F7E7CE33B /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3885ACC2482C29543A94AD /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +30,11 @@
 		8EA3C06426975F450042CB93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EA3C06726975F450042CB93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8EA3C06926975F450042CB93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8ECADDE826A48612008831CE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		8ECADDEA26A4862C008831CE /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
+		8ECADDEC26A487D9008831CE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8ECADDEF26A4B3FA008831CE /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		8ECADDF126A4B66E008831CE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B537500B47D7658813FB0A09 /* Pods-TV Shows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.debug.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,6 +64,7 @@
 			children = (
 				8E2A96A12698DE2100E33063 /* Login.storyboard */,
 				8E2A96A32698DE5500E33063 /* LoginViewController.swift */,
+				8ECADDEC26A487D9008831CE /* User.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -79,6 +90,8 @@
 		8EA3C05A26975F400042CB93 /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				8ECADDEE26A4B3EF008831CE /* Shared */,
+				8ECADDE726A48601008831CE /* Home */,
 				8E2A96A02698DCFE00E33063 /* Login */,
 				8EA3C05B26975F400042CB93 /* AppDelegate.swift */,
 				8EA3C06426975F450042CB93 /* Assets.xcassets */,
@@ -86,6 +99,24 @@
 				8EA3C06926975F450042CB93 /* Info.plist */,
 			);
 			path = "TV Shows";
+			sourceTree = "<group>";
+		};
+		8ECADDE726A48601008831CE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8ECADDE826A48612008831CE /* HomeViewController.swift */,
+				8ECADDEA26A4862C008831CE /* HomeStoryboard.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8ECADDEE26A4B3EF008831CE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8ECADDEF26A4B3FA008831CE /* ApiManager.swift */,
+				8ECADDF126A4B66E008831CE /* Router.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		B72CF0BC735CA27DE1F4B299 /* Frameworks */ = {
@@ -157,6 +188,7 @@
 			files = (
 				8E2A96A22698DE2100E33063 /* Login.storyboard in Resources */,
 				8EA3C06826975F450042CB93 /* LaunchScreen.storyboard in Resources */,
+				8ECADDEB26A4862C008831CE /* HomeStoryboard.storyboard in Resources */,
 				8EA3C06526975F450042CB93 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,8 +242,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ECADDED26A487D9008831CE /* User.swift in Sources */,
 				8E2A96A42698DE5500E33063 /* LoginViewController.swift in Sources */,
+				8ECADDF026A4B3FA008831CE /* ApiManager.swift in Sources */,
 				8EA3C05C26975F400042CB93 /* AppDelegate.swift in Sources */,
+				8ECADDF226A4B66E008831CE /* Router.swift in Sources */,
+				8ECADDE926A48612008831CE /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
