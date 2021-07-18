@@ -20,8 +20,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
-    var rememberMeChecked = false
-    var passwordVisible = false
+    private var rememberMeChecked = false
+    private var passwordVisible = false
+    private var userResponse: UserResponse? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,13 @@ class LoginViewController: UIViewController {
         if let usernameText = usernameTextField.text,
            let passwordText = passwordTextField.text {
             alamofireCodableRegisterUserWith(email: usernameText, password: passwordText)
+        }
+    }
+    
+    @IBAction func login() {
+        if let usernameText = usernameTextField.text,
+           let passwordText = passwordTextField.text {
+            loginUserWith(email: usernameText, password: passwordText)
         }
     }
     
@@ -125,10 +133,43 @@ class LoginViewController: UIViewController {
             .validate()
             .responseDecodable(of: UserResponse.self) { dataResponse in
                 switch dataResponse.result {
-                case .success(_):
-                    //TODO: Navigate to hom
+                case .success(let userResponse):
+                    self.userResponse = userResponse
+                    //TODO: Navigate to home
                     SVProgressHUD.showSuccess(withStatus: "Success")
-                case .failure(_):
+                case .failure(let error):
+                    print("API/Serialization failure: \(error)")
+                    SVProgressHUD.showError(withStatus: "Failure")
+                }
+            }
+    }
+    
+    func loginUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users/sign_in",
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { dataResponse in
+                switch dataResponse.result {
+                case .success(let userResponse):
+                    SVProgressHUD.dismiss()
+                    self.userResponse = userResponse
+                    let headers = dataResponse.response?.headers.dictionary ?? [:]
+                    //self?.handleSuccesfulLogin(for: userResponse.user, headers: headers)
+                    //TODO: Navigate to home
+                case .failure(let error):
+                    print("API/Serialization failure: \(error)")
                     SVProgressHUD.showError(withStatus: "Failure")
                 }
             }

@@ -98,6 +98,9 @@
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" name="PrimaryColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="login" destination="Y6W-OH-hqX" eventType="touchUpInside" id="tJL-9z-SKT"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdu-rg-0D2">
                                                 <rect key="frame" x="20" y="567" width="374" height="45"/>
