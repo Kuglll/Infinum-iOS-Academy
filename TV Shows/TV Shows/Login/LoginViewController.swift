@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
+import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -47,6 +49,13 @@ class LoginViewController: UIViewController {
         }else {
             togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
             passwordTextField.isSecureTextEntry = true
+        }
+    }
+    
+    @IBAction func register() {
+        if let usernameText = usernameTextField.text,
+           let passwordText = passwordTextField.text {
+            alamofireCodableRegisterUserWith(email: usernameText, password: passwordText)
         }
     }
     
@@ -96,4 +105,33 @@ class LoginViewController: UIViewController {
         loginButton.clipsToBounds = true
     }
 
+    
+    func alamofireCodableRegisterUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password,
+            "password_confirmation": password
+        ]
+
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users",
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { dataResponse in
+                switch dataResponse.result {
+                case .success(_):
+                    //TODO: Navigate to hom
+                    SVProgressHUD.showSuccess(withStatus: "Success")
+                case .failure(_):
+                    SVProgressHUD.showError(withStatus: "Failure")
+                }
+            }
+    }
+    
 }

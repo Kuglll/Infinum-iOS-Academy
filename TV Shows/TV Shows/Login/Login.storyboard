@@ -108,6 +108,9 @@
                                                 <state key="normal" title="Register">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="register" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sSE-fB-MgS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="PrimaryColor"/>
