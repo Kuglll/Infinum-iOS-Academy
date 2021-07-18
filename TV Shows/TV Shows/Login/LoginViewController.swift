@@ -149,7 +149,10 @@ class LoginViewController: UIViewController {
     }
     
     private func navigateToHome(){
-        //TODO: Navigate to home
+        let storyBoard : UIStoryboard = UIStoryboard(name: "HomeStoryboard", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated:true, completion:nil)
     }
     
 }
