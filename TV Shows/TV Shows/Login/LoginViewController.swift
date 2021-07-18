@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
         toggleLoginAndRegisterButtons(enabled: false)
     }
     
-    @IBAction func rememberMeButtonAction(_ sender: Any) {
+    @IBAction func rememberMeButtonAction() {
         rememberMeChecked = !rememberMeChecked
         if(rememberMeChecked){
             rememberMeButton.setImage(UIImage(named: "CheckboxSelected"), for: .normal)
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func togglePasswordVisibility(_ sender: Any) {
+    @IBAction func togglePasswordVisibility() {
         passwordVisible = !passwordVisible
         if(passwordVisible){
             togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .normal)
