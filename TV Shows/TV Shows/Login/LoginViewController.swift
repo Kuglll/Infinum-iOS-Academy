@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import SVProgressHUD
-import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -56,14 +55,42 @@ class LoginViewController: UIViewController {
     @IBAction func register() {
         if let usernameText = usernameTextField.text,
            let passwordText = passwordTextField.text {
-            alamofireCodableRegisterUserWith(email: usernameText, password: passwordText)
+            SVProgressHUD.show()
+            ApiManager.instance.alamofireCodableRegisterUserWith(
+                email: usernameText,
+                password: passwordText,
+                success: { (user, headers) in
+                    SVProgressHUD.dismiss()
+                    self.storeUser(user: user)
+                    print("Headers: \(headers)")
+                    self.navigateToHome()
+                },
+                failure: { (error) in
+                    SVProgressHUD.dismiss()
+                    self.showError(error: error)
+                }
+            )
         }
     }
     
     @IBAction func login() {
         if let usernameText = usernameTextField.text,
            let passwordText = passwordTextField.text {
-            loginUserWith(email: usernameText, password: passwordText)
+            SVProgressHUD.show()
+            ApiManager.instance.loginUserWith(
+                email: usernameText,
+                password: passwordText,
+                success: { (user, headers) in
+                    SVProgressHUD.dismiss()
+                    self.storeUser(user: user)
+                    print("Headers: \(headers)")
+                    self.navigateToHome()
+                },
+                failure: { (error) in
+                    SVProgressHUD.dismiss()
+                    self.showError(error: error)
+                }
+            )
         }
     }
     
@@ -112,67 +139,17 @@ class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
     }
-
     
-    func alamofireCodableRegisterUserWith(email: String, password: String) {
-        SVProgressHUD.show()
-
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password,
-            "password_confirmation": password
-        ]
-
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users",
-                method: .post,
-                parameters: parameters,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseDecodable(of: UserResponse.self) { dataResponse in
-                switch dataResponse.result {
-                case .success(let userResponse):
-                    self.userResponse = userResponse
-                    //TODO: Navigate to home
-                    SVProgressHUD.showSuccess(withStatus: "Success")
-                case .failure(let error):
-                    print("API/Serialization failure: \(error)")
-                    SVProgressHUD.showError(withStatus: "Failure")
-                }
-            }
+    private func storeUser(user: UserResponse){
+        userResponse = user
     }
     
-    func loginUserWith(email: String, password: String) {
-        SVProgressHUD.show()
-
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password
-        ]
-
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users/sign_in",
-                method: .post,
-                parameters: parameters,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseDecodable(of: UserResponse.self) { dataResponse in
-                switch dataResponse.result {
-                case .success(let userResponse):
-                    SVProgressHUD.dismiss()
-                    self.userResponse = userResponse
-                    let headers = dataResponse.response?.headers.dictionary ?? [:]
-                    //self?.handleSuccesfulLogin(for: userResponse.user, headers: headers)
-                    //TODO: Navigate to home
-                case .failure(let error):
-                    print("API/Serialization failure: \(error)")
-                    SVProgressHUD.showError(withStatus: "Failure")
-                }
-            }
+    private func showError(error: String){
+        print("API/Serialization failure: \(error)")
+    }
+    
+    private func navigateToHome(){
+        //TODO: Navigate to home
     }
     
 }
