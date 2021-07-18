@@ -13,12 +13,20 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var counterLabel: UILabel!
     var x: Int = 0
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.activityIndicator.stopAnimating()
+        }
+    }
+
     @IBAction func incrementButton(_ sender: Any) {
         x += 1
         self.counterLabel.text = String(x)
     }
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBAction func startButton(_ sender: Any) {
         activityIndicator.startAnimating()
@@ -29,13 +37,5 @@ class LoginViewController: UIViewController {
         activityIndicator.stopAnimating()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.activityIndicator.stopAnimating()
-        }
-    }
-
 }
 
