@@ -11,7 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var counterLabel: UILabel!
-    var x: Int = 0
+    private var numberOfClicks: Int = 0
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -24,8 +24,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func incrementButton() {
-        x += 1
-        counterLabel.text = String(x)
+        numberOfClicks += 1
+        counterLabel.text = String(numberOfClicks)
     }
     
     @IBAction func startButton() {
