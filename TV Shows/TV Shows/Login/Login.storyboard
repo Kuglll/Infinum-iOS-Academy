@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgP-FU-GdW">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                        <rect key="frame" x="0.0" y="-50" width="414" height="700"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashTopLeftIcon" translatesAutoresizingMaskIntoConstraints="NO" id="grS-t7-SC6">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
@@ -155,7 +155,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PgP-FU-GdW" secondAttribute="bottom" id="Aid-iF-Uem"/>
                                     <constraint firstItem="PgP-FU-GdW" firstAttribute="leading" secondItem="5Om-9X-Zoa" secondAttribute="leading" id="I1W-xN-Aac"/>
-                                    <constraint firstItem="PgP-FU-GdW" firstAttribute="top" secondItem="5Om-9X-Zoa" secondAttribute="top" id="MMk-Sd-fWO"/>
+                                    <constraint firstItem="PgP-FU-GdW" firstAttribute="top" secondItem="5Om-9X-Zoa" secondAttribute="top" constant="-50" id="MMk-Sd-fWO"/>
                                     <constraint firstAttribute="trailing" secondItem="PgP-FU-GdW" secondAttribute="trailing" id="Qtq-YQ-eZd"/>
                                 </constraints>
                             </scrollView>
@@ -187,13 +187,15 @@
         <!--Navigation Controller-->
         <scene sceneID="Qvs-Mg-h71">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0kk-Ib-hEz" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0kk-Ib-hEz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yFp-aa-bvH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="yFp-aa-bvH">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qi7-m2-TrD">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="t3f-gh-qkh"/>
                     </connections>
