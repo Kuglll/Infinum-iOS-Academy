@@ -65,14 +65,16 @@ private extension LoginViewController {
     }
     
     @objc func checkIfButtonsNeedToBeEnabled(){
-        if let unwrappedCountUsername = usernameTextField.text?.count,
-           unwrappedCountUsername > 0,
-           let unwrappedCountPassword = passwordTextField.text?.count,
-           unwrappedCountPassword > 0 {
-            toggleLoginAndRegisterButtons(enabled: true)
-        } else {
+        guard
+            let username = usernameTextField.text,
+            let password = passwordTextField.text,
+            !username.isEmpty,
+            !password.isEmpty
+        else {
             toggleLoginAndRegisterButtons(enabled: false)
+            return
         }
+        toggleLoginAndRegisterButtons(enabled: true)
     }
     
     func toggleLoginAndRegisterButtons(enabled: Bool){
