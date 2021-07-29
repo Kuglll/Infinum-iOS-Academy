@@ -47,7 +47,7 @@ private extension LoginViewController {
         passwordTextField.isSecureTextEntry = !togglePasswordIcon.isSelected
     }
     
-    @IBAction func register() {
+    @IBAction func registerButtonActionHandler() {
         guard
            let usernameText = usernameTextField.text,
            let passwordText = passwordTextField.text
@@ -74,7 +74,7 @@ private extension LoginViewController {
         )
     }
     
-    @IBAction func login() {
+    @IBAction func loginButtonActionHandler() {
         guard
             let usernameText = usernameTextField.text,
             let passwordText = passwordTextField.text
