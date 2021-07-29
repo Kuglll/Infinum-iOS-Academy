@@ -29,6 +29,12 @@ class LoginViewController: UIViewController {
         toggleLoginAndRegisterButtons(enabled: false)
     }
     
+}
+
+// MARK: - IBActions
+
+private extension LoginViewController {
+    
     @IBAction func rememberMeButtonAction() {
         rememberMeButton.isSelected = !rememberMeButton.isSelected
     }
@@ -38,7 +44,13 @@ class LoginViewController: UIViewController {
         passwordTextField.isSecureTextEntry = !togglePasswordIcon.isSelected
     }
     
-    private func styleTextFields(textFields: [UITextField]){
+}
+
+// MARK: - private methods
+
+private extension LoginViewController {
+    
+    func styleTextFields(textFields: [UITextField]){
         for textField in textFields{
             
             //Bottom border
@@ -55,7 +67,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc private func checkIfButtonsNeedToBeEnabled(){
+    @objc func checkIfButtonsNeedToBeEnabled(){
         if let unwrappedCountUsername = usernameTextField.text?.count,
            unwrappedCountUsername > 0,
            let unwrappedCountPassword = passwordTextField.text?.count,
@@ -66,7 +78,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func toggleLoginAndRegisterButtons(enabled: Bool){
+    func toggleLoginAndRegisterButtons(enabled: Bool){
         loginButton.isEnabled = enabled
         loginButton.backgroundColor = UIColor(white: 1, alpha: enabled ? 1 : 0.3)
         if(enabled){
@@ -79,19 +91,19 @@ class LoginViewController: UIViewController {
         registerButton.setTitleColor(UIColor(white: 1, alpha: enabled ? 1 : 0.4), for: .normal)
     }
     
-    private func styleLoginButton(){
+    func styleLoginButton(){
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
     }
     
-    private func setupRememberMeButton(){
+    func setupRememberMeButton(){
         rememberMeButton.setImage(UIImage(named: "CheckboxSelected"), for: .selected)
         rememberMeButton.setImage(UIImage(named: "CheckboxUnselected"), for: .normal)
     }
     
-    private func setupPasswordIcon(){
+    func setupPasswordIcon(){
         togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .selected)
         togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
     }
-
+    
 }
