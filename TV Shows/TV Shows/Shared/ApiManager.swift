@@ -13,7 +13,12 @@ class ApiManager {
     
     static let instance = ApiManager()
     
-    func alamofireCodableRegisterUserWith(email: String, password: String, success:@escaping (UserResponse, [String : String]?) -> Void, failure:@escaping (String) -> Void) {
+    func alamofireCodableRegisterUserWith(
+        email: String,
+        password: String,
+        success:@escaping (UserResponse, [String : String]?) -> Void,
+        failure:@escaping (String) -> Void
+    ) {
         AF
             .request(Router.register(email: email, password: password))
             .validate()
@@ -27,7 +32,12 @@ class ApiManager {
             }
     }
     
-    func loginUserWith(email: String, password: String, success:@escaping (UserResponse, [String : String]?) -> Void, failure:@escaping (String) -> Void){
+    func loginUserWith(
+        email: String,
+        password: String,
+        success:@escaping (UserResponse, [String : String]?) -> Void,
+        failure:@escaping (String) -> Void
+    ) {
         AF
             .request(Router.login(email: email, password: password))
             .validate()
