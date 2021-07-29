@@ -16,8 +16,7 @@ class ApiManager {
     func alamofireCodableRegisterUserWith(
         email: String,
         password: String,
-        success:@escaping (UserResponse, [String : String]?) -> Void,
-        failure:@escaping (String) -> Void
+        handler: @escaping (Result<(UserResponse, [String : String]), Error>) -> Void
     ) {
         AF
             .request(Router.register(email: email, password: password))
@@ -25,9 +24,11 @@ class ApiManager {
             .responseDecodable(of: UserResponse.self) { dataResponse in
                 switch dataResponse.result {
                 case .success(let userResponse):
-                    success(userResponse, dataResponse.response?.headers.dictionary)
+                    let headers = dataResponse.response?.headers.dictionary ?? [:]
+                    let successTuple = (userResponse, headers)
+                    handler(.success(successTuple))
                 case .failure(let error):
-                    failure(error.errorDescription ?? "")
+                    handler(.failure(error))
                 }
             }
     }
@@ -35,8 +36,7 @@ class ApiManager {
     func loginUserWith(
         email: String,
         password: String,
-        success:@escaping (UserResponse, [String : String]?) -> Void,
-        failure:@escaping (String) -> Void
+        handler: @escaping (Result<(UserResponse, [String : String]), Error>) -> Void
     ) {
         AF
             .request(Router.login(email: email, password: password))
@@ -44,9 +44,11 @@ class ApiManager {
             .responseDecodable(of: UserResponse.self) { dataResponse in
                 switch dataResponse.result {
                 case .success(let userResponse):
-                    success(userResponse, dataResponse.response?.headers.dictionary)
+                    let headers = dataResponse.response?.headers.dictionary ?? [:]
+                    let successTuple = (userResponse, headers)
+                    handler(.success(successTuple))
                 case .failure(let error):
-                    failure(error.errorDescription ?? "")
+                    handler(.failure(error))
                 }
             }
     }

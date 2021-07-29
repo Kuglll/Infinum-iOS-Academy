@@ -54,15 +54,17 @@ private extension LoginViewController {
             ApiManager.instance.alamofireCodableRegisterUserWith(
                 email: usernameText,
                 password: passwordText,
-                success: { (user, headers) in
+                handler: { result in
                     SVProgressHUD.dismiss()
-                    self.storeUser(user: user)
-                    print("Headers: \(headers)")
-                    self.navigateToHome()
-                },
-                failure: { (error) in
-                    SVProgressHUD.dismiss()
-                    self.showError(error: error)
+        
+                    switch result{
+                    case .success(let tuple):
+                        self.storeUser(user: tuple.0)
+                        print("Headers: \(tuple.1)")
+                        self.navigateToHome()
+                    case .failure(let error):
+                        self.showError(error: error.localizedDescription)
+                    }
                 }
             )
         }
@@ -75,15 +77,18 @@ private extension LoginViewController {
             ApiManager.instance.loginUserWith(
                 email: usernameText,
                 password: passwordText,
-                success: { (user, headers) in
+                
+                handler: { result in
                     SVProgressHUD.dismiss()
-                    self.storeUser(user: user)
-                    print("Headers: \(headers)")
-                    self.navigateToHome()
-                },
-                failure: { (error) in
-                    SVProgressHUD.dismiss()
-                    self.showError(error: error)
+                    
+                    switch result{
+                    case .success(let tuple):
+                        self.storeUser(user: tuple.0)
+                        print("Headers: \(tuple.1)")
+                        self.navigateToHome()
+                    case .failure(let error):
+                        self.showError(error: error.localizedDescription)
+                    }
                 }
             )
         }
