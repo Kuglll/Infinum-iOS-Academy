@@ -48,50 +48,58 @@ private extension LoginViewController {
     }
     
     @IBAction func register() {
-        if let usernameText = usernameTextField.text,
-           let passwordText = passwordTextField.text {
-            SVProgressHUD.show()
-            ApiManager.instance.alamofireCodableRegisterUserWith(
-                email: usernameText,
-                password: passwordText,
-                handler: { result in
-                    SVProgressHUD.dismiss()
-        
-                    switch result{
-                    case .success(let tuple):
-                        self.storeUser(user: tuple.0)
-                        print("Headers: \(tuple.1)")
-                        self.navigateToHome()
-                    case .failure(let error):
-                        self.showError(error: error.localizedDescription)
-                    }
-                }
-            )
+        guard
+           let usernameText = usernameTextField.text,
+           let passwordText = passwordTextField.text
+        else {
+            return
         }
+
+        SVProgressHUD.show()
+        ApiManager.instance.alamofireCodableRegisterUserWith(
+            email: usernameText,
+            password: passwordText,
+            handler: { result in
+                SVProgressHUD.dismiss()
+    
+                switch result{
+                case .success(let tuple):
+                    self.storeUser(user: tuple.0)
+                    print("Headers: \(tuple.1)")
+                    self.navigateToHome()
+                case .failure(let error):
+                    self.showError(error: error.localizedDescription)
+                }
+            }
+        )
     }
     
     @IBAction func login() {
-        if let usernameText = usernameTextField.text,
-           let passwordText = passwordTextField.text {
-            SVProgressHUD.show()
-            ApiManager.instance.loginUserWith(
-                email: usernameText,
-                password: passwordText,
-                
-                handler: { result in
-                    SVProgressHUD.dismiss()
-                    
-                    switch result{
-                    case .success(let tuple):
-                        self.storeUser(user: tuple.0)
-                        print("Headers: \(tuple.1)")
-                        self.navigateToHome()
-                    case .failure(let error):
-                        self.showError(error: error.localizedDescription)
-                    }
-                }
-            )
+        guard
+            let usernameText = usernameTextField.text,
+            let passwordText = passwordTextField.text
+        else {
+            return
         }
+        
+        SVProgressHUD.show()
+        ApiManager.instance.loginUserWith(
+            email: usernameText,
+            password: passwordText,
+            
+            handler: { result in
+                SVProgressHUD.dismiss()
+                
+                switch result{
+                case .success(let tuple):
+                    self.storeUser(user: tuple.0)
+                    print("Headers: \(tuple.1)")
+                    self.navigateToHome()
+                case .failure(let error):
+                    self.showError(error: error.localizedDescription)
+                }
+            }
+        )
     }
 }
 
