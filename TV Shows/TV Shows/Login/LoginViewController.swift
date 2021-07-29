@@ -27,16 +27,12 @@ class LoginViewController: UIViewController {
         
         styleTextFields(textFields: [usernameTextField, passwordTextField])
         styleLoginButton()
+        setupRememberMeButton()
         toggleLoginAndRegisterButtons(enabled: false)
     }
     
     @IBAction func rememberMeButtonAction() {
-        rememberMeChecked = !rememberMeChecked
-        if(rememberMeChecked){
-            rememberMeButton.setImage(UIImage(named: "CheckboxSelected"), for: .normal)
-        } else {
-            rememberMeButton.setImage(UIImage(named: "CheckboxUnselected"), for: .normal)
-        }
+        rememberMeButton.isSelected = !rememberMeButton.isSelected
     }
     
     @IBAction func togglePasswordVisibility() {
@@ -94,6 +90,11 @@ class LoginViewController: UIViewController {
     private func styleLoginButton(){
         loginButton.layer.cornerRadius = 21.5
         loginButton.clipsToBounds = true
+    }
+    
+    private func setupRememberMeButton(){
+        rememberMeButton.setImage(UIImage(named: "CheckboxSelected"), for: .selected)
+        rememberMeButton.setImage(UIImage(named: "CheckboxUnselected"), for: .normal)
     }
 
 }
