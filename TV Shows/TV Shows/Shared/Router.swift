@@ -8,9 +8,6 @@
 import Foundation
 import Alamofire
 
-
-let BASIC_URL = "https://tv-shows.infinum.academy/"
-
 enum Router: URLRequestConvertible{
     
     case register(email: String, password: String)
@@ -51,7 +48,7 @@ enum Router: URLRequestConvertible{
     }
     
     func asURLRequest() throws -> URLRequest {
-        let url = try URL(string: BASIC_URL.asURL()
+        let url = try URL(string: Constants.API.baseUrl.asURL()
                                                   .appendingPathComponent(path)
                                                   .absoluteString.removingPercentEncoding!)
         var request = URLRequest.init(url: url!)
