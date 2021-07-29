@@ -36,7 +36,8 @@ class ApiManager {
             AF
                 .request(router)
                 .validate()
-                .responseDecodable(of: Model.self) { dataResponse in
+                .responseDecodable(of: Model.self) { [weak self] dataResponse in
+                    guard let self = self else { return }
                     switch dataResponse.result {
                     case .success(let response):
                         let headers = dataResponse.response?.headers.dictionary ?? [:]
