@@ -18,9 +18,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
-    var rememberMeChecked = false
-    var passwordVisible = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -28,6 +25,7 @@ class LoginViewController: UIViewController {
         styleTextFields(textFields: [usernameTextField, passwordTextField])
         styleLoginButton()
         setupRememberMeButton()
+        setupPasswordIcon()
         toggleLoginAndRegisterButtons(enabled: false)
     }
     
@@ -36,14 +34,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func togglePasswordVisibility() {
-        passwordVisible = !passwordVisible
-        if(passwordVisible){
-            togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .normal)
-            passwordTextField.isSecureTextEntry = false
-        }else {
-            togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
-            passwordTextField.isSecureTextEntry = true
-        }
+        togglePasswordIcon.isSelected = !togglePasswordIcon.isSelected
+        passwordTextField.isSecureTextEntry = !togglePasswordIcon.isSelected
     }
     
     private func styleTextFields(textFields: [UITextField]){
@@ -95,6 +87,11 @@ class LoginViewController: UIViewController {
     private func setupRememberMeButton(){
         rememberMeButton.setImage(UIImage(named: "CheckboxSelected"), for: .selected)
         rememberMeButton.setImage(UIImage(named: "CheckboxUnselected"), for: .normal)
+    }
+    
+    private func setupPasswordIcon(){
+        togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .selected)
+        togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
     }
 
 }
