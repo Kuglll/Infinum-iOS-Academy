@@ -47,14 +47,19 @@ enum Router: URLRequestConvertible{
         }
     }
     
+    var enconding: ParameterEncoding{
+        switch self {
+        case .register, .login:
+            return JSONEncoding.default
+        }
+    }
+    
     func asURLRequest() throws -> URLRequest {
-        let url = try URL(string: Constants.API.baseUrl.asURL()
-                                                  .appendingPathComponent(path)
-                                                  .absoluteString.removingPercentEncoding!)
-        var request = URLRequest.init(url: url!)
-        request.httpMethod = method.rawValue
+        let url = try Constants.API.baseUrl.asURL().appendingPathComponent(path)
+        var request = try URLRequest.init(url: url, method: method)
         request.timeoutInterval = TimeInterval(10*1000)
-        return try URLEncoding.default.encode(request,with: parameters)
+    
+        return try enconding.encode(request, with: parameters)
     }
     
     
