@@ -18,19 +18,7 @@ class ApiManager {
         password: String,
         handler: @escaping (Result<(UserResponse, [String : String]), Error>) -> Void
     ) {
-        AF
-            .request(Router.register(email: email, password: password))
-            .validate()
-            .responseDecodable(of: UserResponse.self) { dataResponse in
-                switch dataResponse.result {
-                case .success(let userResponse):
-                    let headers = dataResponse.response?.headers.dictionary ?? [:]
-                    let successTuple = (userResponse, headers)
-                    handler(.success(successTuple))
-                case .failure(let error):
-                    handler(.failure(error))
-                }
-            }
+        call(router: Router.register(email: email, password: password), handler: handler)
     }
     
     func loginUserWith(
@@ -38,19 +26,27 @@ class ApiManager {
         password: String,
         handler: @escaping (Result<(UserResponse, [String : String]), Error>) -> Void
     ) {
-        AF
-            .request(Router.login(email: email, password: password))
-            .validate()
-            .responseDecodable(of: UserResponse.self) { dataResponse in
-                switch dataResponse.result {
-                case .success(let userResponse):
-                    let headers = dataResponse.response?.headers.dictionary ?? [:]
-                    let successTuple = (userResponse, headers)
-                    handler(.success(successTuple))
-                case .failure(let error):
-                    handler(.failure(error))
-                }
-            }
+        call(router: Router.login(email: email, password: password), handler: handler)
     }
+    
+    func call<Model: Decodable>(
+            router: URLRequestConvertible,
+            handler: @escaping (Result<(Model, [String : String]), Error>) -> Void
+        ) {
+            AF
+                .request(router)
+                .validate()
+                .responseDecodable(of: Model.self) { dataResponse in
+                    switch dataResponse.result {
+                    case .success(let response):
+                        let headers = dataResponse.response?.headers.dictionary ?? [:]
+                        let successTuple = (response, headers)
+                        handler(.success(successTuple))
+                    case .failure(let error):
+                        handler(.failure(error))
+
+                    }
+                }
+        }
     
 }
