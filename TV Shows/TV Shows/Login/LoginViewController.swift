@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        styleTextFields(textFields: [usernameTextField, passwordTextField])
+        [usernameTextField, passwordTextField].forEach(styleTextField)
         styleLoginButton()
         setupRememberMeButton()
         setupPasswordIcon()
@@ -50,21 +50,18 @@ private extension LoginViewController {
 
 private extension LoginViewController {
     
-    func styleTextFields(textFields: [UITextField]){
-        for textField in textFields{
-            
-            //Bottom border
-            let usernameBottomLine = CALayer()
-            usernameBottomLine.frame = CGRect(x: -15, y: textField.frame.height - 2, width: textField.frame.width - 10 , height: 1)
-            usernameBottomLine.backgroundColor = UIColor.white.cgColor
-            textField.borderStyle = .none
-            textField.layer.addSublayer(usernameBottomLine)
-            
-            //Placeholder
-            textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.7)])
-            
-            textField.addTarget(self, action: #selector(checkIfButtonsNeedToBeEnabled), for: .editingChanged)
-        }
+    func styleTextField(textField: UITextField){
+        //Bottom border
+        let usernameBottomLine = CALayer()
+        usernameBottomLine.frame = CGRect(x: -15, y: textField.frame.height - 2, width: textField.frame.width - 10 , height: 1)
+        usernameBottomLine.backgroundColor = UIColor.white.cgColor
+        textField.borderStyle = .none
+        textField.layer.addSublayer(usernameBottomLine)
+        
+        //Placeholder
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(white: 1, alpha: 0.7)])
+        
+        textField.addTarget(self, action: #selector(checkIfButtonsNeedToBeEnabled), for: .editingChanged)
     }
     
     @objc func checkIfButtonsNeedToBeEnabled(){
