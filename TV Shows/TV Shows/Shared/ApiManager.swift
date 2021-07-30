@@ -49,4 +49,21 @@ class ApiManager {
                 }
         }
     
+    func getShowsList(
+        authInfo: AuthInfo,
+        handler: @escaping (Result<(ShowsResponse), Error>) -> Void
+    ){
+        AF
+            .request(Router.listShows(authInfo: authInfo))
+            .validate()
+            .responseDecodable(of: ShowsResponse.self){ dataResponse in
+                switch dataResponse.result {
+                case .success(let showsResponse):
+                    handler(.success(showsResponse))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+            }
+    }
+    
 }

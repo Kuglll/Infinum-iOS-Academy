@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E2A96A22698DE2100E33063 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E2A96A12698DE2100E33063 /* Login.storyboard */; };
 		8E2A96A42698DE5500E33063 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A96A32698DE5500E33063 /* LoginViewController.swift */; };
+		8E50F45926B4909D0064C68D /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50F45826B4909D0064C68D /* Show.swift */; };
 		8EA3C05C26975F400042CB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3C05B26975F400042CB93 /* AppDelegate.swift */; };
 		8EA3C06526975F450042CB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EA3C06426975F450042CB93 /* Assets.xcassets */; };
 		8EA3C06826975F450042CB93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA3C06626975F450042CB93 /* LaunchScreen.storyboard */; };
@@ -26,6 +27,7 @@
 		4F3FE069451D019124D866FD /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
 		8E2A96A12698DE2100E33063 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		8E2A96A32698DE5500E33063 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8E50F45826B4909D0064C68D /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		8EA3C05826975F400042CB93 /* TV Shows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TV Shows.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA3C05B26975F400042CB93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EA3C06426975F450042CB93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				8ECADDE826A48612008831CE /* HomeViewController.swift */,
 				8ECADDEA26A4862C008831CE /* HomeStoryboard.storyboard */,
+				8E50F45826B4909D0064C68D /* Show.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				8EA3C05C26975F400042CB93 /* AppDelegate.swift in Sources */,
 				8EA4AFB926B345370084CBD4 /* Constants.swift in Sources */,
 				8ECADDF226A4B66E008831CE /* Router.swift in Sources */,
+				8E50F45926B4909D0064C68D /* Show.swift in Sources */,
 				8ECADDE926A48612008831CE /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
