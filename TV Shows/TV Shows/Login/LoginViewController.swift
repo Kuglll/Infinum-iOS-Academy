@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     
     private var userResponse: UserResponse? = nil
+    private var authInfo: AuthInfo? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +67,7 @@ private extension LoginViewController {
                 switch result{
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
-                    print("Headers: \(tuple.1)")
+                    self.storeAuthInfo(headers: tuple.1)
                     self.navigateToHome()
                 case .failure(let error):
                     self.showUIAlert(error: error)
@@ -95,7 +96,7 @@ private extension LoginViewController {
                 switch result{
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
-                    print("Headers: \(tuple.1)")
+                    self.storeAuthInfo(headers: tuple.1)
                     self.navigateToHome()
                 case .failure(let error):
                     self.showUIAlert(error: error)
@@ -156,6 +157,14 @@ private extension LoginViewController {
     
     func storeUser(user: UserResponse){
         userResponse = user
+    }
+    
+    func storeAuthInfo(headers: [String: String]){
+        guard let authInfo = try? AuthInfo(headers: headers) else {
+            SVProgressHUD.showError(withStatus: "Missing headers")
+            return
+        }
+        self.authInfo = authInfo
     }
     
     func navigateToHome(){
