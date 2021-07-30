@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
     
@@ -17,6 +18,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    
+    private var userResponse: UserResponse? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +47,62 @@ private extension LoginViewController {
         passwordTextField.isSecureTextEntry = !togglePasswordIcon.isSelected
     }
     
+    @IBAction func registerButtonActionHandler() {
+        guard
+           let usernameText = usernameTextField.text,
+           let passwordText = passwordTextField.text
+        else {
+            return
+        }
+
+        SVProgressHUD.show()
+        ApiManager.instance.alamofireCodableRegisterUserWith(
+            email: usernameText,
+            password: passwordText,
+            handler: { [weak self] result in
+                SVProgressHUD.dismiss()
+                guard let self = self else { return }
+    
+                switch result{
+                case .success(let tuple):
+                    self.storeUser(user: tuple.0)
+                    print("Headers: \(tuple.1)")
+                    self.navigateToHome()
+                case .failure(let error):
+                    self.showError(error: error.localizedDescription)
+                }
+            }
+        )
+    }
+    
+    @IBAction func loginButtonActionHandler() {
+        guard
+            let usernameText = usernameTextField.text,
+            let passwordText = passwordTextField.text
+        else {
+            return
+        }
+        
+        SVProgressHUD.show()
+        ApiManager.instance.loginUserWith(
+            email: usernameText,
+            password: passwordText,
+            
+            handler: { [weak self]  result in
+                SVProgressHUD.dismiss()
+                guard let self = self else { return }
+                
+                switch result{
+                case .success(let tuple):
+                    self.storeUser(user: tuple.0)
+                    print("Headers: \(tuple.1)")
+                    self.navigateToHome()
+                case .failure(let error):
+                    self.showError(error: error.localizedDescription)
+                }
+            }
+        )
+    }
 }
 
 // MARK: - private methods
@@ -95,6 +154,20 @@ private extension LoginViewController {
         loginButton.clipsToBounds = true
     }
     
+    private func storeUser(user: UserResponse){
+        userResponse = user
+    }
+    
+    private func showError(error: String){
+        print("API/Serialization failure: \(error)")
+    }
+    
+    private func navigateToHome(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "HomeStoryboard", bundle:nil)
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        navigationController?.setViewControllers([homeViewController], animated: true)
+    }
+
     func setupRememberMeButton(){
         rememberMeButton.setImage(UIImage(named: "CheckboxSelected"), for: .selected)
         rememberMeButton.setImage(UIImage(named: "CheckboxUnselected"), for: .normal)
@@ -103,6 +176,7 @@ private extension LoginViewController {
     func setupPasswordIcon(){
         togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .selected)
         togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
+
     }
     
 }

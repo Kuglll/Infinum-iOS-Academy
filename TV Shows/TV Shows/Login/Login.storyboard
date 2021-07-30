@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0kk-Ib-hEz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -21,11 +21,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgP-FU-GdW">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
+                                        <rect key="frame" x="0.0" y="-50" width="414" height="700"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashTopRightIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iID-ku-Cil">
-                                                <rect key="frame" x="212" y="0.0" width="202" height="266"/>
-                                            </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashTopLeftIcon" translatesAutoresizingMaskIntoConstraints="NO" id="grS-t7-SC6">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
                                             </imageView>
@@ -98,6 +95,9 @@
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" name="PrimaryColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="loginButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="tJL-9z-SKT"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdu-rg-0D2">
                                                 <rect key="frame" x="20" y="567" width="374" height="45"/>
@@ -108,7 +108,13 @@
                                                 <state key="normal" title="Register">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="registerButtonActionHandler" destination="Y6W-OH-hqX" eventType="touchUpInside" id="sSE-fB-MgS"/>
+                                                </connections>
                                             </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashTopRightIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iID-ku-Cil">
+                                                <rect key="frame" x="212" y="0.0" width="202" height="266"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" name="PrimaryColor"/>
                                         <constraints>
@@ -149,7 +155,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="PgP-FU-GdW" secondAttribute="bottom" id="Aid-iF-Uem"/>
                                     <constraint firstItem="PgP-FU-GdW" firstAttribute="leading" secondItem="5Om-9X-Zoa" secondAttribute="leading" id="I1W-xN-Aac"/>
-                                    <constraint firstItem="PgP-FU-GdW" firstAttribute="top" secondItem="5Om-9X-Zoa" secondAttribute="top" id="MMk-Sd-fWO"/>
+                                    <constraint firstItem="PgP-FU-GdW" firstAttribute="top" secondItem="5Om-9X-Zoa" secondAttribute="top" constant="-50" id="MMk-Sd-fWO"/>
                                     <constraint firstAttribute="trailing" secondItem="PgP-FU-GdW" secondAttribute="trailing" id="Qtq-YQ-eZd"/>
                                 </constraints>
                             </scrollView>
@@ -164,6 +170,7 @@
                             <constraint firstItem="5Om-9X-Zoa" firstAttribute="trailing" secondItem="QXc-Yv-s80" secondAttribute="trailing" id="r8D-HI-abQ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Slz-U7-NAI"/>
                     <connections>
                         <outlet property="loginButton" destination="Eh9-D3-5x5" id="oKS-17-ajB"/>
                         <outlet property="passwordTextField" destination="ZpX-R1-vyc" id="6ZJ-7u-4tW"/>
@@ -175,7 +182,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="73.913043478260875" y="88.392857142857139"/>
+            <point key="canvasLocation" x="1894.2028985507247" y="88.392857142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Qvs-Mg-h71">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0kk-Ib-hEz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="yFp-aa-bvH">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qi7-m2-TrD">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="t3f-gh-qkh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uIa-Iw-KGX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="984.05797101449286" y="88.392857142857139"/>
         </scene>
     </scenes>
     <resources>
