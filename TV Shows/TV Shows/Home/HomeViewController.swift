@@ -14,6 +14,8 @@ class HomeViewController : UIViewController{
     var userResponse: UserResponse? = nil
     var authInfo: AuthInfo? = nil
     
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
