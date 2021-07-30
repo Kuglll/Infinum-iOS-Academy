@@ -14,12 +14,15 @@ class HomeViewController : UIViewController{
     var userResponse: UserResponse? = nil
     var authInfo: AuthInfo? = nil
     
+    private var shows: [String?] = [nil]
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getShowsList()
+        setupTableView()
     }
     
     func setUserResponse(userResponse: UserResponse){
@@ -31,6 +34,31 @@ class HomeViewController : UIViewController{
     }
     
 }
+
+// MARK: - UITableViewDataSource
+
+extension HomeViewController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return shows.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: TVShowTableViewCell.self),
+            for: indexPath
+        ) as! TVShowTableViewCell
+
+        cell.configure(with: shows[indexPath.row] ?? "")
+        return cell
+    }
+}
+
 
 // MARK: - private methods
 
@@ -58,11 +86,26 @@ private extension HomeViewController{
             
             switch result{
             case .success(let showsResponse):
-                print(showsResponse)
+                showsResponse.shows.forEach({ show in
+                    self.shows.append(show.title)
+                    self.tableView.reloadData()
+                })
             case .failure(let error):
                 self.showUIAlert(error: error)
             }
         }
+    }
+    
+    func setupTableView() {
+        tableView.estimatedRowHeight = 110
+        tableView.rowHeight = UITableView.automaticDimension
+
+        // Little trick to remove empty table view cells from the screen, play with removing it.
+        tableView.tableFooterView = UIView()
+
+        //TODO: Uncomment this when tapping on cell will be implemented
+        //tableView.delegate = self
+        tableView.dataSource = self
     }
     
 }
