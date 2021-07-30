@@ -10,9 +10,20 @@ import UIKit
 
 class HomeViewController : UIViewController{
  
+    var userResponse: UserResponse? = nil
+    var authInfo: AuthInfo? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+    }
+    
+    func setUserResponse(userResponse: UserResponse){
+        self.userResponse = userResponse
+    }
+    
+    func setAuthInfo(authInfo: AuthInfo){
+        self.authInfo = authInfo
     }
     
 }
