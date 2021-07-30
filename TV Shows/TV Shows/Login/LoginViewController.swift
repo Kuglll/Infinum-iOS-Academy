@@ -59,8 +59,9 @@ private extension LoginViewController {
         ApiManager.instance.alamofireCodableRegisterUserWith(
             email: usernameText,
             password: passwordText,
-            handler: { result in
+            handler: { [weak self] result in
                 SVProgressHUD.dismiss()
+                guard let self = self else { return }
     
                 switch result{
                 case .success(let tuple):
@@ -87,8 +88,9 @@ private extension LoginViewController {
             email: usernameText,
             password: passwordText,
             
-            handler: { result in
+            handler: { [weak self]  result in
                 SVProgressHUD.dismiss()
+                guard let self = self else { return }
                 
                 switch result{
                 case .success(let tuple):
