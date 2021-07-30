@@ -69,7 +69,7 @@ private extension LoginViewController {
                     print("Headers: \(tuple.1)")
                     self.navigateToHome()
                 case .failure(let error):
-                    self.showError(error: error.localizedDescription)
+                    self.showUIAlert(error: error)
                 }
             }
         )
@@ -98,7 +98,7 @@ private extension LoginViewController {
                     print("Headers: \(tuple.1)")
                     self.navigateToHome()
                 case .failure(let error):
-                    self.showError(error: error.localizedDescription)
+                    self.showUIAlert(error: error)
                 }
             }
         )
@@ -154,17 +154,13 @@ private extension LoginViewController {
         loginButton.clipsToBounds = true
     }
     
-    private func storeUser(user: UserResponse){
+    func storeUser(user: UserResponse){
         userResponse = user
     }
     
-    private func showError(error: String){
-        print("API/Serialization failure: \(error)")
-    }
-    
-    private func navigateToHome(){
+    func navigateToHome(){
         let storyBoard : UIStoryboard = UIStoryboard(name: "HomeStoryboard", bundle:nil)
-        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") 
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
 
@@ -176,7 +172,14 @@ private extension LoginViewController {
     func setupPasswordIcon(){
         togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .selected)
         togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
+    }
+    
+    func showUIAlert(error: Error){
+        let alertController = UIAlertController(title: "An error has occured", message: "Error: \(error)", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(OKAction)
 
+        self.present(alertController, animated: true)
     }
     
 }
