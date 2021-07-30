@@ -19,24 +19,7 @@ class HomeViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard
-            let unwrappedAuthInfo = authInfo
-        else {
-            return
-        }
-        
-        SVProgressHUD.show()
-        ApiManager.instance.getShowsList(authInfo: unwrappedAuthInfo) { [weak self] result in
-            SVProgressHUD.dismiss()
-            guard let self = self else { return }
-            
-            switch result{
-            case .success(let showsResponse):
-                print(showsResponse)
-            case .failure(let error):
-                self.showUIAlert(error: error)
-            }
-        }
+        getShowsList()
     }
     
     func setUserResponse(userResponse: UserResponse){
@@ -59,6 +42,27 @@ private extension HomeViewController{
         alertController.addAction(OKAction)
 
         self.present(alertController, animated: true)
+    }
+    
+    func getShowsList(){
+        guard
+            let unwrappedAuthInfo = authInfo
+        else {
+            return
+        }
+        
+        SVProgressHUD.show()
+        ApiManager.instance.getShowsList(authInfo: unwrappedAuthInfo) { [weak self] result in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            
+            switch result{
+            case .success(let showsResponse):
+                print(showsResponse)
+            case .failure(let error):
+                self.showUIAlert(error: error)
+            }
+        }
     }
     
 }
