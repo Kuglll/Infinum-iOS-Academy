@@ -68,7 +68,7 @@ private extension ShowDetailsViewController{
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ShowDetailsHeaderCell.self)
         ) as! ShowDetailsHeaderCell
-        cell.configure()
+        cell.configure(show: show)
         return cell
     }
     

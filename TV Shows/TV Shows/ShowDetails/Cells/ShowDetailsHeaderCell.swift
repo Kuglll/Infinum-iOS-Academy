@@ -30,9 +30,14 @@ final class ShowDetailsHeaderCell: UITableViewCell {
 
 extension ShowDetailsHeaderCell {
 
-    func configure() {
-        ratingLabel.text = "10 outa 10"
-        showDescriptionLabel.text = "very gooooood"
+    func configure(show: ShowLocal?) {
+        showImageView.image = UIImage(named: "showImagePlaceholder")
+        if let unwrappedNumberOfReviews = show?.numberOfReviews,
+           let unwrappedAverageRating = show?.averageRating {
+            
+            ratingLabel.text = "\(unwrappedNumberOfReviews) REVIEWS, \(unwrappedAverageRating) AVERAGE"
+        }
+        showDescriptionLabel.text = show?.description
     }
 }
 
