@@ -14,7 +14,7 @@ final class ReviewCell: UITableViewCell {
     
     @IBOutlet weak var userPhotoImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var ratingView: UIView!
+    @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var commentLabel: UILabel!
     
     
@@ -22,7 +22,15 @@ final class ReviewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        //TODO: Need to reset all the properties here
+        usernameLabel.text = nil
+        commentLabel.text = nil
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        ratingView.configure(withStyle: .small)
+        ratingView.isEnabled = false
     }
 
 }
@@ -33,8 +41,9 @@ extension ReviewCell {
 
     func configure(review: Review?) {
         userPhotoImageView.image = UIImage(named: "showImagePlaceholder")
-        usernameLabel.text = "test.user"
-        commentLabel.text = "a simple comment"
+        usernameLabel.text = review?.user.email
+        commentLabel.text = review?.comment
+        ratingView.setRoundedRating(Double(review?.rating ?? 0))
     }
 }
 

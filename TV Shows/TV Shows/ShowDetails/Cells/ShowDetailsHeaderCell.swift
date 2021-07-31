@@ -21,7 +21,8 @@ final class ShowDetailsHeaderCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        //TODO: Need to reset all the properties here
+        ratingLabel.text = nil
+        showDescriptionLabel.text = nil
     }
     
     override func awakeFromNib() {

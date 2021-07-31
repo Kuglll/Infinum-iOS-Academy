@@ -80,7 +80,11 @@ private extension ShowDetailsViewController{
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ReviewCell.self)
         ) as! ReviewCell
-        cell.configure(review: reviews[index])
+        if index < reviews.count {
+            cell.configure(review: reviews[index])
+        } else {
+            cell.configure(review: nil)
+        }
         return cell
     }
     
