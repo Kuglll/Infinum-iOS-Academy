@@ -58,11 +58,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XF4-yW-xk4" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="627" width="374" height="112"/>
+                                                    <rect key="frame" x="20" y="602" width="374" height="137"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="XF4-yW-xk4" firstAttribute="top" secondItem="dWC-Hz-rVX" secondAttribute="bottom" constant="30" id="1SO-7T-T7V"/>
                                                 <constraint firstItem="UWW-lZ-Bb8" firstAttribute="top" secondItem="bZv-qT-QSz" secondAttribute="topMargin" id="2gt-E4-R0Q"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dWC-Hz-rVX" secondAttribute="trailing" id="2yA-Yw-6lC"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="UWW-lZ-Bb8" secondAttribute="trailing" id="4FO-mK-Yag"/>
@@ -75,6 +74,7 @@
                                                 <constraint firstItem="dWC-Hz-rVX" firstAttribute="top" secondItem="ogY-DM-PpU" secondAttribute="bottom" constant="20" id="Pwf-Da-J4J"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="XF4-yW-xk4" secondAttribute="bottom" id="Xl0-xP-x2s"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="9QY-LT-F7R" secondAttribute="trailing" id="hzs-Cf-W6M"/>
+                                                <constraint firstItem="XF4-yW-xk4" firstAttribute="top" secondItem="dWC-Hz-rVX" secondAttribute="bottom" constant="5" id="lhm-t4-IwO"/>
                                                 <constraint firstItem="9QY-LT-F7R" firstAttribute="top" secondItem="UWW-lZ-Bb8" secondAttribute="bottom" id="o1J-Gd-UPC"/>
                                                 <constraint firstItem="ogY-DM-PpU" firstAttribute="leading" secondItem="bZv-qT-QSz" secondAttribute="leadingMargin" id="pHE-cd-0JU"/>
                                                 <constraint firstItem="XF4-yW-xk4" firstAttribute="leading" secondItem="bZv-qT-QSz" secondAttribute="leadingMargin" id="rEP-nD-QXI"/>
