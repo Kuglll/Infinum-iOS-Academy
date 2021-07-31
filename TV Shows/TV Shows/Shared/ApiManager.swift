@@ -84,4 +84,24 @@ class ApiManager {
             }
     }
     
+    func postReview(
+        comment: String,
+        rating: Int,
+        showId: Int,
+        authInfo: AuthInfo,
+        handler: @escaping (Result<(Data?), Error>) -> Void
+    ){
+        AF
+            .request(Router.postReview(comment: comment, rating: rating, showId: showId, authInfo: authInfo))
+            .validate()
+            .response{ dataResponse in
+                switch dataResponse.result {
+                case .success(let response):
+                    handler(.success(response))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+            }
+    }
+    
 }

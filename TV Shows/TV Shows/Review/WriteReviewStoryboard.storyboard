@@ -53,6 +53,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="submitButtonActionHandler:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pQn-L3-H4N"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -74,6 +77,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="commentTextField" destination="F3P-b5-zW4" id="hDe-Wu-7Pa"/>
+                        <outlet property="ratingView" destination="5my-Bo-W9C" id="Amp-s2-FUW"/>
                         <outlet property="submitButton" destination="Uvq-7n-bOw" id="Pau-ic-Dig"/>
                     </connections>
                 </viewController>

@@ -14,6 +14,7 @@ enum Router: URLRequestConvertible{
     case login(email: String, password: String)
     case listShows(authInfo: AuthInfo)
     case getReviewsForShowId(showId: String, authInfo: AuthInfo)
+    case postReview(comment: String, rating: Int, showId: Int, authInfo: AuthInfo)
     
     var path: String {
         switch self {
@@ -25,12 +26,14 @@ enum Router: URLRequestConvertible{
             return "shows"
         case .getReviewsForShowId(let showId, _):
             return "shows/\(showId)/reviews"
+        case .postReview:
+            return "reviews"
         }
     }
     
     var method: HTTPMethod{
         switch self {
-        case .register, .login:
+        case .register, .login, .postReview:
             return .post
         case .listShows, .getReviewsForShowId:
             return .get
@@ -60,6 +63,12 @@ enum Router: URLRequestConvertible{
                 "page": "1",
                 "items": "10"
             ]
+        case .postReview(let comment, let rating, let showId, _):
+            return [
+                "comment": comment,
+                "rating": rating,
+                "show_id": showId
+            ]
         }
     }
     
@@ -67,7 +76,7 @@ enum Router: URLRequestConvertible{
         switch self{
         case .register, .login:
             return nil
-        case .listShows(let authInfo), .getReviewsForShowId(_, let authInfo):
+        case .listShows(let authInfo), .getReviewsForShowId(_, let authInfo), .postReview(_, _, _, let authInfo):
             return authInfo.headers
         }
     }
@@ -75,7 +84,7 @@ enum Router: URLRequestConvertible{
     
     var enconding: ParameterEncoding{
         switch self {
-        case .register, .login:
+        case .register, .login, .postReview:
             return JSONEncoding.default
         case .listShows, .getReviewsForShowId:
             return URLEncoding.default

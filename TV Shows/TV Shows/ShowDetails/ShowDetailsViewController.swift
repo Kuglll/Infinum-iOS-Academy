@@ -149,7 +149,16 @@ private extension ShowDetailsViewController{
     
     @objc func navigateToWriteReview(){
         let storyBoard : UIStoryboard = UIStoryboard(name: "WriteReviewStoryboard", bundle:nil)
-        let writeReviewViewController = storyBoard.instantiateViewController(withIdentifier: "WriteReviewViewController")
+        let writeReviewViewController = storyBoard.instantiateViewController(withIdentifier: "WriteReviewViewController") as! WriteReviewViewController
+        
+        guard
+            let unwrappedAuthInfo = authInfo,
+            let unwrappedShowId = show?.id
+        else {
+            return
+        }
+        writeReviewViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
+        writeReviewViewController.setShowId(showId: unwrappedShowId)
         let navigationController = UINavigationController(rootViewController:writeReviewViewController)
         
         self.present(navigationController, animated: true, completion: nil)
