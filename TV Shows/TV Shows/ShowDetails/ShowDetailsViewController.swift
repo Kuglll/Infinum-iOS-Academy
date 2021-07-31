@@ -148,7 +148,10 @@ private extension ShowDetailsViewController{
     }
     
     @objc func navigateToWriteReview(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "WriteReviewStoryboard", bundle:nil)
+        let writeReviewViewController = storyBoard.instantiateViewController(withIdentifier: "WriteReviewViewController")
         
+        self.present(writeReviewViewController, animated: true, completion: nil)
     }
     
 }
