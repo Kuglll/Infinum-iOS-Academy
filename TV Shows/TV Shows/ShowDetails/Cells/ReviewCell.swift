@@ -31,7 +31,8 @@ final class ReviewCell: UITableViewCell {
 
 extension ReviewCell {
 
-    func configure() {
+    func configure(review: Review?) {
+        userPhotoImageView.image = UIImage(named: "showImagePlaceholder")
         usernameLabel.text = "test.user"
         commentLabel.text = "a simple comment"
     }

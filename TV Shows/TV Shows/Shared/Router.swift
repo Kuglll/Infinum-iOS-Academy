@@ -13,6 +13,7 @@ enum Router: URLRequestConvertible{
     case register(email: String, password: String)
     case login(email: String, password: String)
     case listShows(authInfo: AuthInfo)
+    case getReviewsForShowId(showId: String, authInfo: AuthInfo)
     
     var path: String {
         switch self {
@@ -22,6 +23,8 @@ enum Router: URLRequestConvertible{
             return "users/sign_in"
         case .listShows:
             return "shows"
+        case .getReviewsForShowId(let showId, _):
+            return "shows/\(showId)/reviews"
         }
     }
     
@@ -29,7 +32,7 @@ enum Router: URLRequestConvertible{
         switch self {
         case .register, .login:
             return .post
-        case .listShows:
+        case .listShows, .getReviewsForShowId:
             return .get
         }
     }
@@ -52,6 +55,11 @@ enum Router: URLRequestConvertible{
                 "page": "1",
                 "items": "100"
             ]
+        case .getReviewsForShowId:
+            return [
+                "page": "1",
+                "items": "10"
+            ]
         }
     }
     
@@ -59,7 +67,7 @@ enum Router: URLRequestConvertible{
         switch self{
         case .register, .login:
             return nil
-        case .listShows(let authInfo):
+        case .listShows(let authInfo), .getReviewsForShowId(_, let authInfo):
             return authInfo.headers
         }
     }
@@ -69,7 +77,7 @@ enum Router: URLRequestConvertible{
         switch self {
         case .register, .login:
             return JSONEncoding.default
-        case .listShows:
+        case .listShows, .getReviewsForShowId:
             return URLEncoding.default
         }
     }

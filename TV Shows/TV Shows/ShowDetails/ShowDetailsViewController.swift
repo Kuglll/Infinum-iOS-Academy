@@ -7,18 +7,21 @@
 
 import Foundation
 import UIKit
+import SVProgressHUD
 
 class ShowDetailsViewController : UIViewController{
     
     var show: ShowLocal? = nil
     var authInfo: AuthInfo? = nil
     
+    private var reviews: [Review?] = [nil]
+    
     @IBOutlet weak var showDetailsTableView: UITableView! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        getReviews()
         setupNavBar()
         setupTableView()
     }
@@ -42,7 +45,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return reviews.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,7 +53,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             return makeShowDetailsHeaderCell(from: tableView)
         }
-        return makeReviewCell(from: tableView)
+        return makeReviewCell(from: tableView, index: indexPath.row)
     }
 }
 
@@ -73,11 +76,11 @@ private extension ShowDetailsViewController{
         return cell
     }
     
-    func makeReviewCell(from tableView: UITableView) -> ReviewCell{
+    func makeReviewCell(from tableView: UITableView, index: Int) -> ReviewCell{
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ReviewCell.self)
         ) as! ReviewCell
-        cell.configure()
+        cell.configure(review: reviews[index])
         return cell
     }
     
@@ -87,6 +90,40 @@ private extension ShowDetailsViewController{
 
         // Little trick to remove empty table view cells from the screen, play with removing it.
         showDetailsTableView.tableFooterView = UIView()
+    }
+    
+    func getReviews(){
+        guard
+            let unwrappedAuthInfo = authInfo,
+            let unwrappedShowId = show?.id
+        else {
+            return
+        }
+        
+        SVProgressHUD.show()
+        ApiManager.instance.getReviewsForShow(showId: unwrappedShowId, authInfo: unwrappedAuthInfo) { [weak self] result in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            
+            switch result{
+            case .success(let reviewsResponse):
+                reviewsResponse.reviews.forEach({review in
+                  
+                    self.reviews.append(review)
+                    self.showDetailsTableView.reloadData()
+                })
+            case .failure(let error):
+                self.showUIAlert(error: error)
+            }
+        }
+    }
+    
+    func showUIAlert(error: Error){
+        let alertController = UIAlertController(title: "An error has occured", message: "Error: \(error)", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(OKAction)
+
+        self.present(alertController, animated: true)
     }
     
 }
