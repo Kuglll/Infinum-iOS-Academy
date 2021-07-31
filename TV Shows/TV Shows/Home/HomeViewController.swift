@@ -77,7 +77,7 @@ extension HomeViewController: UITableViewDelegate{
         else {
             return
         }
-        showDetailsViewController.setShowId(showId: unwrappedShowId)
+        showDetailsViewController.setShow(show: item)
         showDetailsViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
         
         navigationController?.pushViewController(showDetailsViewController, animated: true)

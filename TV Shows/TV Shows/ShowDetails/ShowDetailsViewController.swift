@@ -10,17 +10,19 @@ import UIKit
 
 class ShowDetailsViewController : UIViewController{
     
-    var showId: String? = nil
+    var show: ShowLocal? = nil
     var authInfo: AuthInfo? = nil
     @IBOutlet weak var showIdLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showIdLabel.text = showId
+        showIdLabel.text = show?.id
+        
+        
     }
     
-    func setShowId(showId: String){
-        self.showId = showId
+    func setShow(show: ShowLocal?){
+        self.show = show
     }
     
     func setAuthInfo(authInfo: AuthInfo){
