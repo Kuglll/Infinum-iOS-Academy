@@ -24,6 +24,7 @@ class ShowDetailsViewController : UIViewController{
         getReviews()
         setupNavBar()
         setupTableView()
+        setupTableViewFooter()
     }
     
     func setShow(show: ShowLocal?){
@@ -45,7 +46,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reviews.count + 1
+        return reviews.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,6 +97,22 @@ private extension ShowDetailsViewController{
         showDetailsTableView.tableFooterView = UIView()
     }
     
+    func setupTableViewFooter(){
+        let footerView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: showDetailsTableView.frame.width-40,
+                                              height: 50))
+        let doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: showDetailsTableView.frame.width-60, height: 40.0))
+        doneButton.center = footerView.center
+
+        doneButton.setTitle("Write a Review", for: .normal)
+        doneButton.backgroundColor = UIColor(named: "PrimaryColor")?.withAlphaComponent(1)
+        doneButton.layer.cornerRadius = 20.0
+        doneButton.addTarget(self, action: #selector(navigateToWriteReview), for: .touchUpInside)
+        footerView.addSubview(doneButton)
+        showDetailsTableView.tableFooterView = footerView
+    }
+    
     func getReviews(){
         guard
             let unwrappedAuthInfo = authInfo,
@@ -128,6 +145,10 @@ private extension ShowDetailsViewController{
         alertController.addAction(OKAction)
 
         self.present(alertController, animated: true)
+    }
+    
+    @objc func navigateToWriteReview(){
+        
     }
     
 }
