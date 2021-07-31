@@ -18,7 +18,7 @@ class ShowDetailsViewController : UIViewController{
         super.viewDidLoad()
         showIdLabel.text = show?.id
         
-        
+        setupNavBar()
     }
     
     func setShow(show: ShowLocal?){
@@ -27,6 +27,16 @@ class ShowDetailsViewController : UIViewController{
     
     func setAuthInfo(authInfo: AuthInfo){
         self.authInfo = authInfo
+    }
+    
+}
+
+private extension ShowDetailsViewController{
+    
+    func setupNavBar(){
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.view.backgroundColor = UIColor.white
+        self.title = show?.title
     }
     
 }
