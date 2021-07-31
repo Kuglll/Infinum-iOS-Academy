@@ -23,6 +23,7 @@ class HomeViewController : UIViewController{
         
         getShowsList()
         setupTableView()
+        showNavBar()
     }
     
     func setUserResponse(userResponse: UserResponse){
@@ -118,6 +119,10 @@ private extension HomeViewController{
         //TODO: Uncomment this when tapping on cell will be implemented
         //tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    func showNavBar(){
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
 }
