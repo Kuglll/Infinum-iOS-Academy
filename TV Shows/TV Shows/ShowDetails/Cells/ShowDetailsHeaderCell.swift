@@ -22,13 +22,13 @@ final class ShowDetailsHeaderCell: UITableViewCell {
         super.prepareForReuse()
 
         //TODO: Need to reset all the properties here
-        configureImageView()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         ratingView.configure(withStyle: .large)
         ratingView.isEnabled = false
+        configureImageView()
     }
 
 }
@@ -49,7 +49,7 @@ extension ShowDetailsHeaderCell {
     }
     
     func configureImageView(){
-        showImageView.layer.cornerRadius = 50.0
+        showImageView.layer.cornerRadius = 15.0
     }
 }
 
