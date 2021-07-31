@@ -12,11 +12,12 @@ class ShowDetailsViewController : UIViewController{
     
     var show: ShowLocal? = nil
     var authInfo: AuthInfo? = nil
-    @IBOutlet weak var showIdLabel: UILabel!
+    
+    @IBOutlet weak var showDetailsTableView: UITableView! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showIdLabel.text = show?.id
+
         
         setupNavBar()
     }
@@ -31,12 +32,52 @@ class ShowDetailsViewController : UIViewController{
     
 }
 
+// MARK: - UITableViewDataSource
+
+extension ShowDetailsViewController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 0 {
+            return makeShowDetailsHeaderCell(from: tableView)
+        }
+        return makeReviewCell(from: tableView)
+    }
+}
+
+// MARK: - Private methods
+
 private extension ShowDetailsViewController{
     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.view.backgroundColor = UIColor.white
         self.title = show?.title
+    }
+    
+    func makeShowDetailsHeaderCell(from tableView: UITableView) -> ShowDetailsHeaderCell{
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: ShowDetailsHeaderCell.self)
+        ) as! ShowDetailsHeaderCell
+        cell.configure()
+        return cell
+    }
+    
+    func makeReviewCell(from tableView: UITableView) -> ReviewCell{
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: ReviewCell.self)
+        ) as! ReviewCell
+        cell.configure()
+        return cell
     }
     
 }
