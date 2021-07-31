@@ -9,10 +9,16 @@ import Foundation
 import UIKit
 import SVProgressHUD
 
+protocol ReviewWrittenDelegate: AnyObject{
+    func reviewWritten()
+}
+
 class WriteReviewViewController: UIViewController{
     
     var authInfo: AuthInfo? = nil
     var showId: String? = nil
+    
+    weak var delegate: ReviewWrittenDelegate?
     
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var commentTextField: UITextField!
@@ -58,8 +64,8 @@ private extension WriteReviewViewController{
             
             switch result{
             case .success(_):
-                //navigate back and refresh reviews
-                print("navigate back and refresh reviews")
+                self.delegate?.reviewWritten()
+                self.dismiss(animated: true, completion: nil)
             case .failure(let error):
                 self.showUIAlert(error: error)
             }

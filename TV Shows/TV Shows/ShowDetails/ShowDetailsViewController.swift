@@ -16,7 +16,7 @@ class ShowDetailsViewController : UIViewController{
     
     private var reviews: [Review?] = [nil]
     
-    @IBOutlet weak var showDetailsTableView: UITableView! 
+    @IBOutlet weak var showDetailsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,16 @@ class ShowDetailsViewController : UIViewController{
         self.authInfo = authInfo
     }
     
+}
+
+// MARK: - SecondViewControllerDelegate
+
+extension ShowDetailsViewController: ReviewWrittenDelegate {
+
+    func reviewWritten() {
+        reviews = [nil]
+        getReviews()
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -159,6 +169,7 @@ private extension ShowDetailsViewController{
         }
         writeReviewViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
         writeReviewViewController.setShowId(showId: unwrappedShowId)
+        writeReviewViewController.delegate = self
         let navigationController = UINavigationController(rootViewController:writeReviewViewController)
         
         self.present(navigationController, animated: true, completion: nil)
