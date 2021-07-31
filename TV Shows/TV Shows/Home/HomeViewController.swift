@@ -71,6 +71,15 @@ extension HomeViewController: UITableViewDelegate{
         let storyBoard : UIStoryboard = UIStoryboard(name: "ShowDetailsStoryboard", bundle:nil)
         let showDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
         
+        guard
+            let unwrappedShowId = item?.id,
+            let unwrappedAuthInfo = authInfo
+        else {
+            return
+        }
+        showDetailsViewController.setShowId(showId: unwrappedShowId)
+        showDetailsViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
+        
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
     
