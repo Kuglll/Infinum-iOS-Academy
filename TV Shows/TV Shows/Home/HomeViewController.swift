@@ -14,7 +14,7 @@ class HomeViewController : UIViewController{
     var userResponse: UserResponse? = nil
     var authInfo: AuthInfo? = nil
     
-    private var shows: [String?] = [nil]
+    private var shows: [ShowLocal?] = [nil]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -55,7 +55,7 @@ extension HomeViewController: UITableViewDataSource {
             for: indexPath
         ) as! TVShowTableViewCell
 
-        cell.configure(with: shows[indexPath.row] ?? "")
+        cell.configure(with: shows[indexPath.row])
         return cell
     }
 }
@@ -104,7 +104,16 @@ private extension HomeViewController{
             switch result{
             case .success(let showsResponse):
                 showsResponse.shows.forEach({ show in
-                    self.shows.append(show.title)
+                    self.shows.append(
+                        ShowLocal(
+                            id: show.id,
+                            averageRating: show.average_rating,
+                            description: show.description,
+                            imageUrl: show.image_url,
+                            numberOfReviews: show.no_of_reviews,
+                            title: show.title
+                        )
+                    )
                     self.tableView.reloadData()
                 })
             case .failure(let error):
@@ -119,10 +128,6 @@ private extension HomeViewController{
 
         // Little trick to remove empty table view cells from the screen, play with removing it.
         tableView.tableFooterView = UIView()
-
-        //TODO: Uncomment this when tapping on cell will be implemented
-        //tableView.delegate = self
-        tableView.dataSource = self
     }
     
     func showNavBar(){

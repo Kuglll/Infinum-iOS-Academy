@@ -20,3 +20,12 @@ struct Show: Decodable {
 struct ShowsResponse: Decodable {
     let shows: [Show]
 }
+
+struct ShowLocal{
+    let id: String
+    let averageRating: Int?
+    let description: String?
+    let imageUrl: String
+    let numberOfReviews: Int
+    let title: String
+}
