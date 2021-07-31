@@ -14,7 +14,7 @@ final class ShowDetailsHeaderCell: UITableViewCell {
     @IBOutlet weak var showImageView: UIImageView!
     @IBOutlet weak var showDescriptionLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var ratingView: UIView!
+    @IBOutlet weak var ratingView: RatingView!
     
     
     // MARK: - Lifecycle
@@ -22,6 +22,13 @@ final class ShowDetailsHeaderCell: UITableViewCell {
         super.prepareForReuse()
 
         //TODO: Need to reset all the properties here
+        configureImageView()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        ratingView.configure(withStyle: .large)
+        ratingView.isEnabled = false
     }
 
 }
@@ -38,6 +45,11 @@ extension ShowDetailsHeaderCell {
             ratingLabel.text = "\(unwrappedNumberOfReviews) REVIEWS, \(unwrappedAverageRating) AVERAGE"
         }
         showDescriptionLabel.text = show?.description
+        ratingView.setRoundedRating(Double(show?.averageRating ?? 0))
+    }
+    
+    func configureImageView(){
+        showImageView.layer.cornerRadius = 50.0
     }
 }
 

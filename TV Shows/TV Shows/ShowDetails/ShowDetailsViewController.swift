@@ -20,6 +20,7 @@ class ShowDetailsViewController : UIViewController{
 
         
         setupNavBar()
+        setupTableView()
     }
     
     func setShow(show: ShowLocal?){
@@ -78,6 +79,14 @@ private extension ShowDetailsViewController{
         ) as! ReviewCell
         cell.configure()
         return cell
+    }
+    
+    func setupTableView() {
+        showDetailsTableView.estimatedRowHeight = 110
+        showDetailsTableView.rowHeight = UITableView.automaticDimension
+
+        // Little trick to remove empty table view cells from the screen, play with removing it.
+        showDetailsTableView.tableFooterView = UIView()
     }
     
 }
