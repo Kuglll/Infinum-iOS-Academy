@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 final class ReviewCell: UITableViewCell {
 
@@ -24,6 +25,7 @@ final class ReviewCell: UITableViewCell {
 
         usernameLabel.text = nil
         commentLabel.text = nil
+        userPhotoImageView.image = nil
     }
     
     override func awakeFromNib() {
@@ -40,10 +42,13 @@ final class ReviewCell: UITableViewCell {
 extension ReviewCell {
 
     func configure(review: Review?) {
-        userPhotoImageView.image = UIImage(named: "ic-profile-placeholder")
         usernameLabel.text = review?.user.email
         commentLabel.text = review?.comment
         ratingView.setRoundedRating(Double(review?.rating ?? 0))
+        
+        if let unwrappedUserImage = review?.user.imageUrl{
+            userPhotoImageView.kf.setImage(with: unwrappedUserImage, placeholder: UIImage(named: "ic-profile-placeholder"))
+        }
     }
 }
 
