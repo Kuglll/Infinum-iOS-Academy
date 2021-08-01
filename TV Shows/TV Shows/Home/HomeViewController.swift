@@ -112,6 +112,7 @@ private extension HomeViewController{
             
             switch result{
             case .success(let showsResponse):
+                self.shows = []
                 showsResponse.shows.forEach({ show in
                     self.shows.append(
                         ShowLocal(

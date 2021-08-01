@@ -12,13 +12,15 @@ final class TVShowTableViewCell: UITableViewCell {
 
     // MARK: - Private UI
     @IBOutlet weak var titleLabel: UILabel!
-
+    @IBOutlet weak var showImageView: UIImageView!
+    
     
     // MARK: - Lifecycle
     override func prepareForReuse() {
         super.prepareForReuse()
 
         titleLabel.text = nil
+        showImageView.image = nil
     }
 
 }
@@ -31,5 +33,6 @@ extension TVShowTableViewCell {
         if let unwrappedTitle = item?.title{
             titleLabel.text = unwrappedTitle
         }
+        showImageView.image = UIImage(named: "showImagePlaceholder")
     }
 }
