@@ -68,6 +68,7 @@ private extension LoginViewController {
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
                     self.storeAuthInfo(headers: tuple.1)
+                    self.checkForRememberMeAndStoreAuthInfo()
                     self.navigateToHome()
                 case .failure(let error):
                     self.showUIAlert(error: error)
@@ -98,6 +99,7 @@ private extension LoginViewController {
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
                     self.storeAuthInfo(headers: tuple.1)
+                    self.checkForRememberMeAndStoreAuthInfo()
                     self.navigateToHome()
                 case .failure(let error):
                     self.showUIAlert(error: error)
@@ -215,6 +217,17 @@ private extension LoginViewController {
         animation.fromValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x - 10, y: passwordTextField.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x + 10, y: passwordTextField.center.y))
         passwordTextField.layer.add(animation, forKey: "position")
+    }
+    
+    func checkForRememberMeAndStoreAuthInfo(){
+        if rememberMeButton.isSelected{
+            if let unwrappedAuthInfo = authInfo{
+                let encoder = PropertyListEncoder()
+                if let encoded = try? encoder.encode(unwrappedAuthInfo) {
+                    UserDefaults.standard.set(encoded, forKey: "authInfo")
+                }
+            }
+        }
     }
     
 }
