@@ -39,7 +39,7 @@ final class ShowDetailsHeaderCell: UITableViewCell {
 extension ShowDetailsHeaderCell {
 
     func configure(show: ShowLocal?) {
-        showImageView.image = UIImage(named: "showImagePlaceholder")
+        showImageView.image = UIImage(named: "ic-show-placeholder-rectangle")
         if let unwrappedNumberOfReviews = show?.numberOfReviews,
            let unwrappedAverageRating = show?.averageRating {
             

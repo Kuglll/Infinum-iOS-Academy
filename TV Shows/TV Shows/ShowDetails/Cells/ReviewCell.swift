@@ -40,7 +40,7 @@ final class ReviewCell: UITableViewCell {
 extension ReviewCell {
 
     func configure(review: Review?) {
-        userPhotoImageView.image = UIImage(named: "showImagePlaceholder")
+        userPhotoImageView.image = UIImage(named: "ic-profile-placeholder")
         usernameLabel.text = review?.user.email
         commentLabel.text = review?.comment
         ratingView.setRoundedRating(Double(review?.rating ?? 0))

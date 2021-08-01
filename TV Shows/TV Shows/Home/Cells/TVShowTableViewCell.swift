@@ -33,6 +33,6 @@ extension TVShowTableViewCell {
         if let unwrappedTitle = item?.title{
             titleLabel.text = unwrappedTitle
         }
-        showImageView.image = UIImage(named: "showImagePlaceholder")
+        showImageView.image = UIImage(named: "ic-show-placeholder-vertical")
     }
 }
