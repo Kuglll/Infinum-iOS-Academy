@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 final class TVShowTableViewCell: UITableViewCell {
 
@@ -33,6 +34,8 @@ extension TVShowTableViewCell {
         if let unwrappedTitle = item?.title{
             titleLabel.text = unwrappedTitle
         }
-        showImageView.image = UIImage(named: "ic-show-placeholder-vertical")
+        if let unwrappedImageUrl = item?.imageUrl{
+            showImageView.kf.setImage(with: unwrappedImageUrl, placeholder: UIImage(named: "ic-show-placeholder-vertical"))
+        }
     }
 }
