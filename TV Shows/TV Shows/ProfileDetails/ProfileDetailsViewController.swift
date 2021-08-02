@@ -31,12 +31,24 @@ class ProfileDetailsViewController: UIViewController{
     
 }
 
+extension ProfileDetailsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                userImageView.image = pickedImage
+            }
+            
+            dismiss(animated: true, completion: nil)
+        }
+    
+}
+
 // MARK: - IBAction
 
 private extension ProfileDetailsViewController{
     
     @IBAction func changeProfileButtonHandler(_ sender: Any) {
-        //Implement image uploading
+        openImagePicker()
     }
     
     @IBAction func logoutButtonHandler(_ sender: Any) {
@@ -100,6 +112,17 @@ private extension ProfileDetailsViewController {
         alertController.addAction(OKAction)
 
         self.present(alertController, animated: true)
+    }
+    
+    func openImagePicker(){
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+
+            present(imagePicker, animated: true, completion: nil)
+        }
     }
     
 }
