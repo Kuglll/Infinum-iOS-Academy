@@ -16,6 +16,7 @@ enum Router: URLRequestConvertible{
     case getReviewsForShowId(showId: String, authInfo: AuthInfo)
     case postReview(comment: String, rating: Int, showId: Int, authInfo: AuthInfo)
     case getCurrentLoggedInUser(authInfo: AuthInfo)
+    case uploadImage(email: String, authInfo: AuthInfo)
     
     var path: String {
         switch self {
@@ -31,6 +32,8 @@ enum Router: URLRequestConvertible{
             return "reviews"
         case .getCurrentLoggedInUser:
             return "users/me"
+        case .uploadImage:
+            return "users"
         }
     }
     
@@ -40,6 +43,8 @@ enum Router: URLRequestConvertible{
             return .post
         case .listShows, .getReviewsForShowId, .getCurrentLoggedInUser:
             return .get
+        case .uploadImage:
+            return .put
         }
     }
     
@@ -74,6 +79,10 @@ enum Router: URLRequestConvertible{
             ]
         case .getCurrentLoggedInUser:
             return nil
+        case .uploadImage(let email, _):
+            return [
+                "email": email
+            ]
         }
     }
     
@@ -84,7 +93,8 @@ enum Router: URLRequestConvertible{
         case .listShows(let authInfo),
              .getReviewsForShowId(_, let authInfo),
              .postReview(_, _, _, let authInfo),
-             .getCurrentLoggedInUser(let authInfo):
+             .getCurrentLoggedInUser(let authInfo),
+             .uploadImage(_, let authInfo):
             return authInfo.headers
         }
     }
@@ -92,7 +102,7 @@ enum Router: URLRequestConvertible{
     
     var enconding: ParameterEncoding{
         switch self {
-        case .register, .login, .postReview:
+        case .register, .login, .postReview, .uploadImage:
             return JSONEncoding.default
         case .listShows, .getReviewsForShowId, .getCurrentLoggedInUser:
             return URLEncoding.default

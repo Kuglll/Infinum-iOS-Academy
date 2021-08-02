@@ -13,6 +13,7 @@ import Kingfisher
 class ProfileDetailsViewController: UIViewController{
     
     var authInfo: AuthInfo? = nil
+    private var user: User? = nil
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
@@ -35,7 +36,7 @@ extension ProfileDetailsViewController: UINavigationControllerDelegate, UIImageP
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-                userImageView.image = pickedImage
+                uploadPhoto(image: pickedImage)
             }
             
             dismiss(animated: true, completion: nil)
@@ -95,6 +96,7 @@ private extension ProfileDetailsViewController {
             switch result{
             case .success(let userResponse):
                 self.setProfileDetails(user: userResponse.user)
+                self.saveUser(user: userResponse.user)
             case .failure(let error):
                 self.showUIAlert(error: error)
             }
@@ -123,6 +125,32 @@ private extension ProfileDetailsViewController {
 
             present(imagePicker, animated: true, completion: nil)
         }
+    }
+    
+    func uploadPhoto(image: UIImage){
+        guard
+            let unwrappedAuthInfo = authInfo,
+            let email = user?.email
+        else {
+            return
+        }
+        
+        SVProgressHUD.show()
+        ApiManager.instance.uploadUserPhoto(image: image, email: email, authInfo: unwrappedAuthInfo, handler: {[weak self] result in
+            SVProgressHUD.dismiss()
+            guard let self = self else { return }
+            
+            switch result{
+            case .success(let userResponse):
+                self.setProfileDetails(user: userResponse.user)
+            case .failure(let error):
+                self.showUIAlert(error: error)
+            }
+        })
+    }
+    
+    func saveUser(user: User?){
+        self.user = user
     }
     
 }

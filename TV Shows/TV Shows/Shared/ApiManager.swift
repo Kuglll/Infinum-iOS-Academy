@@ -121,4 +121,38 @@ class ApiManager {
             }
     }
     
+    func uploadUserPhoto(
+        image: UIImage,
+        email: String,
+        authInfo: AuthInfo,
+        handler: @escaping (Result<(UserResponse), Error>) -> Void
+    ){
+        guard
+            let imageData = image.jpegData(compressionQuality: 0.9)
+        else { return }
+        
+        let requestData = MultipartFormData()
+        requestData.append(
+                imageData,
+                withName: "image",
+                fileName: "image.jpg",
+                mimeType: "image/jpg"
+        )
+        
+        AF
+            .upload(
+                multipartFormData: requestData,
+                with: Router.uploadImage(email: email, authInfo: authInfo)
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { dataResponse in
+                switch dataResponse.result {
+                case .success(let user):
+                    handler(.success(user))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+        }
+    }
+    
 }
