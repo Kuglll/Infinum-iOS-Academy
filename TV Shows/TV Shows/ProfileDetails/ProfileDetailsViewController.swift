@@ -12,13 +12,32 @@ class ProfileDetailsViewController: UIViewController{
     
     var authInfo: AuthInfo? = nil
     
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var logoutButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        styleLogoutButton()
     }
     
     func setAuthInfo(authInfo: AuthInfo){
         self.authInfo = authInfo
+    }
+    
+}
+
+// MARK: - IBAction
+
+private extension ProfileDetailsViewController{
+    
+    @IBAction func changeProfileButtonHandler(_ sender: Any) {
+        //Implement image uploading
+    }
+    
+    @IBAction func logoutButtonHandler(_ sender: Any) {
+        //Implement logout
     }
     
 }
@@ -40,6 +59,10 @@ private extension ProfileDetailsViewController {
         )
         
         navigationItem.title = "My Account"
+    }
+    
+    func styleLogoutButton(){
+        logoutButton.layer.cornerRadius = 25.0
     }
     
 }
