@@ -104,4 +104,21 @@ class ApiManager {
             }
     }
     
+    func getCurrentLoggedInUser(
+        authInfo: AuthInfo,
+        handler: @escaping (Result<(UserResponse), Error>) -> Void
+    ){
+        AF
+            .request(Router.getCurrentLoggedInUser(authInfo: authInfo))
+            .validate()
+            .responseDecodable(of: UserResponse.self){ dataResponse in
+                switch dataResponse.result {
+                case .success(let user):
+                    handler(.success(user))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+            }
+    }
+    
 }
