@@ -24,6 +24,7 @@ class HomeViewController : UIViewController{
         getShowsList()
         setupTableView()
         showNavBar()
+        setupRightNavigationAction()
     }
     
     func setUserResponse(userResponse: UserResponse){
@@ -142,6 +143,16 @@ private extension HomeViewController{
     
     func showNavBar(){
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func setupRightNavigationAction(){
+        let profileImage = UIImage(named: "ic-profile")?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: profileImage, style: .plain, target: self, action: #selector(navigateToProfileDetails))
+
+    }
+    
+    @objc func navigateToProfileDetails(){
+        
     }
     
 }
