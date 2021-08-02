@@ -10,6 +10,8 @@ import UIKit
 import SVProgressHUD
 import Kingfisher
 
+let NotificationDidLogout = Notification.Name(rawValue: "NotificationDidLogout")
+
 class ProfileDetailsViewController: UIViewController{
     
     var authInfo: AuthInfo? = nil
@@ -53,7 +55,7 @@ private extension ProfileDetailsViewController{
     }
     
     @IBAction func logoutButtonHandler(_ sender: Any) {
-        //Implement logout
+        logout()
     }
     
 }
@@ -151,6 +153,14 @@ private extension ProfileDetailsViewController {
     
     func saveUser(user: User?){
         self.user = user
+    }
+    
+    func logout(){
+        dismiss(animated: true, completion: {
+            UserDefaults.standard.removeObject(forKey:"authInfo")
+            let notification = Notification(name: NotificationDidLogout)
+            NotificationCenter.default.post(notification)
+        })
     }
     
 }

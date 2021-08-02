@@ -13,6 +13,7 @@ class HomeViewController : UIViewController{
  
     var userResponse: UserResponse? = nil
     var authInfo: AuthInfo? = nil
+    var notificationToken: NSObjectProtocol?
     
     private var shows: [ShowLocal?] = [nil]
     
@@ -25,6 +26,11 @@ class HomeViewController : UIViewController{
         setupTableView()
         showNavBar()
         setupRightNavigationAction()
+        addLogoutObserver()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(notificationToken!)
     }
     
     func setUserResponse(userResponse: UserResponse){
@@ -164,6 +170,19 @@ private extension HomeViewController{
         
         let navigationController = UINavigationController(rootViewController: profileDetailsViewController)
         self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func addLogoutObserver(){
+        notificationToken = NotificationCenter
+            .default
+            .addObserver(forName: NotificationDidLogout, object: nil, queue: nil, using: { [weak self] _ in
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Login", bundle:nil)
+                let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                
+                self?.navigationController?.setNavigationBarHidden(true, animated: false)
+                self?.navigationController?.setViewControllers([loginViewController], animated: true)
+            })
     }
     
 }
