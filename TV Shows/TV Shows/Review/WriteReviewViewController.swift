@@ -65,7 +65,7 @@ private extension WriteReviewViewController {
             switch result{
             case .success(_):
                 self.delegate?.reviewWritten()
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true)
             case .failure(let error):
                 self.showUIAlert(error: error)
             }
