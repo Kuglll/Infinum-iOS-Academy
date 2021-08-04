@@ -28,8 +28,8 @@ final class TVShowTableViewCell: UITableViewCell {
 extension TVShowTableViewCell {
 
     func configure(with item: ShowLocal?) {
-        if let unwrappedTitle = item?.title{
-            titleLabel.text = unwrappedTitle
+        if let title = item?.title{
+            titleLabel.text = title
         }
     }
 }

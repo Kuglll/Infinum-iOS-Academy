@@ -11,10 +11,10 @@ import UIKit
 final class ShowDetailsHeaderCell: UITableViewCell {
 
     // MARK: - Private UI
-    @IBOutlet weak var showImageView: UIImageView!
-    @IBOutlet weak var showDescriptionLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var ratingView: RatingView!
+    @IBOutlet private weak var showImageView: UIImageView!
+    @IBOutlet private weak var showDescriptionLabel: UILabel!
+    @IBOutlet private weak var ratingLabel: UILabel!
+    @IBOutlet private weak var ratingView: RatingView!
     
     
     // MARK: - Lifecycle
@@ -40,10 +40,10 @@ extension ShowDetailsHeaderCell {
 
     func configure(show: ShowLocal?) {
         showImageView.image = UIImage(named: "showImagePlaceholder")
-        if let unwrappedNumberOfReviews = show?.numberOfReviews,
-           let unwrappedAverageRating = show?.averageRating {
+        if let numberOfReviews = show?.numberOfReviews,
+           let averageRating = show?.averageRating {
             
-            ratingLabel.text = "\(unwrappedNumberOfReviews) REVIEWS, \(unwrappedAverageRating) AVERAGE"
+            ratingLabel.text = "\(numberOfReviews) REVIEWS, \(averageRating) AVERAGE"
         }
         showDescriptionLabel.text = show?.description
         ratingView.setRoundedRating(Double(show?.averageRating ?? 0))

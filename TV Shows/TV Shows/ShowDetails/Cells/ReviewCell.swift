@@ -12,10 +12,10 @@ final class ReviewCell: UITableViewCell {
 
     // MARK: - Private UI
     
-    @IBOutlet weak var userPhotoImageView: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var ratingView: RatingView!
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet private weak var userPhotoImageView: UIImageView!
+    @IBOutlet private weak var usernameLabel: UILabel!
+    @IBOutlet private weak var ratingView: RatingView!
+    @IBOutlet private weak var commentLabel: UILabel!
     
     
     // MARK: - Lifecycle
