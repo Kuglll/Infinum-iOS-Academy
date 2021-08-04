@@ -115,10 +115,10 @@ private extension HomeViewController{
                     self.shows.append(
                         ShowLocal(
                             id: show.id,
-                            averageRating: show.average_rating,
+                            averageRating: show.averageRating,
                             description: show.description,
-                            imageUrl: show.image_url,
-                            numberOfReviews: show.no_of_reviews,
+                            imageUrl: show.imageUrl,
+                            numberOfReviews: show.numOfReviews,
                             title: show.title
                         )
                     )
