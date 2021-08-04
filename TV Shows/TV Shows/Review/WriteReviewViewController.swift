@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SVProgressHUD
 
-protocol ReviewWrittenDelegate: AnyObject{
+protocol ReviewWrittenDelegate: AnyObject {
     func reviewWritten()
 }
 
@@ -43,7 +43,7 @@ class WriteReviewViewController: UIViewController {
 
 // MARK: - IBActions
 
-private extension WriteReviewViewController{
+private extension WriteReviewViewController {
     
     @IBAction func submitButtonActionHandler(_ sender: Any) {
         guard
