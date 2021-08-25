@@ -157,7 +157,7 @@ private extension HomeViewController{
     }
     
     @objc func navigateToProfileDetails(){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "ProfileDetailsStoryboard", bundle:nil)
+        let storyBoard = UIStoryboard(name: "ProfileDetailsStoryboard", bundle:nil)
         let profileDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "ProfileDetailsViewController") as! ProfileDetailsViewController
         
         guard

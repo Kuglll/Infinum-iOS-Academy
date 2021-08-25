@@ -220,12 +220,13 @@ private extension LoginViewController {
     }
     
     func checkForRememberMeAndStoreAuthInfo(){
-        if rememberMeButton.isSelected{
-            if let unwrappedAuthInfo = authInfo{
-                let encoder = PropertyListEncoder()
-                if let encoded = try? encoder.encode(unwrappedAuthInfo) {
-                    UserDefaults.standard.set(encoded, forKey: "authInfo")
-                }
+        guard rememberMeButton.isSelected else {
+            return
+        }
+        if let unwrappedAuthInfo = authInfo{
+            let encoder = PropertyListEncoder()
+            if let encoded = try? encoder.encode(unwrappedAuthInfo) {
+                UserDefaults.standard.set(encoded, forKey: Constants.authInfo)
             }
         }
     }

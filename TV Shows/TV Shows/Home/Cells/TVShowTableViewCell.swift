@@ -34,7 +34,7 @@ extension TVShowTableViewCell {
         if let title = item?.title{
             titleLabel.text = title
         }
-        if let unwrappedImageUrl = item?.imageUrl{
+        if let unwrappedImageUrl = item?.imageUrl {
             showImageView.kf.setImage(with: unwrappedImageUrl, placeholder: UIImage(named: "ic-show-placeholder-vertical"))
         }
     }

@@ -91,7 +91,7 @@ private extension ProfileDetailsViewController {
         }
         
         SVProgressHUD.show()
-        ApiManager.instance.getCurrentLoggedInUser(authInfo: unwrappedAuthInfo){[weak self] result in
+        ApiManager.instance.getCurrentLoggedInUser(authInfo: unwrappedAuthInfo) { [weak self] result in
             SVProgressHUD.dismiss()
             guard let self = self else { return }
             
@@ -157,7 +157,7 @@ private extension ProfileDetailsViewController {
     
     func logout(){
         dismiss(animated: true, completion: {
-            UserDefaults.standard.removeObject(forKey:"authInfo")
+            UserDefaults.standard.removeObject(forKey:Constants.authInfo)
             let notification = Notification(name: NotificationDidLogout)
             NotificationCenter.default.post(notification)
         })

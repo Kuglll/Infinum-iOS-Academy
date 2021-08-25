@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let decoder = PropertyListDecoder()
         if
-            let data = UserDefaults.standard.data(forKey: "authInfo"),
-            let decodedAuthInfo = try? decoder.decode(AuthInfo.self, from: data){
+            let data = UserDefaults.standard.data(forKey: Constants.authInfo),
+            let decodedAuthInfo = try? decoder.decode(AuthInfo.self, from: data)
+        {
             
             let storyBoard : UIStoryboard = UIStoryboard(name: "HomeStoryboard", bundle:nil)
             let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
