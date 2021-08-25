@@ -14,7 +14,7 @@ class HomeViewController : UIViewController{
     var userResponse: UserResponse? = nil
     var authInfo: AuthInfo? = nil
     
-    private var shows: [String?] = [nil]
+    private var shows: [ShowLocal?] = [nil]
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,6 +23,7 @@ class HomeViewController : UIViewController{
         
         getShowsList()
         setupTableView()
+        showNavBar()
     }
     
     func setUserResponse(userResponse: UserResponse){
@@ -54,9 +55,33 @@ extension HomeViewController: UITableViewDataSource {
             for: indexPath
         ) as! TVShowTableViewCell
 
-        cell.configure(with: shows[indexPath.row] ?? "")
+        cell.configure(with: shows[indexPath.row])
         return cell
     }
+}
+
+// MARK: - UITableViewDelegate
+
+extension HomeViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let item = shows[indexPath.row]
+        
+        let storyBoard = UIStoryboard(name: "ShowDetailsStoryboard", bundle:nil)
+        let showDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
+        
+        guard
+            let authInfo = authInfo
+        else {
+            return
+        }
+        showDetailsViewController.setShow(show: item)
+        showDetailsViewController.setAuthInfo(authInfo: authInfo)
+        
+        navigationController?.pushViewController(showDetailsViewController, animated: true)
+    }
+    
 }
 
 
@@ -86,10 +111,19 @@ private extension HomeViewController{
             
             switch result{
             case .success(let showsResponse):
-                showsResponse.shows.forEach({ show in
-                    self.shows.append(show.title)
+                showsResponse.shows.forEach{ show in
+                    self.shows.append(
+                        ShowLocal(
+                            id: show.id,
+                            averageRating: show.averageRating,
+                            description: show.description,
+                            imageUrl: show.imageUrl,
+                            numberOfReviews: show.numOfReviews,
+                            title: show.title
+                        )
+                    )
                     self.tableView.reloadData()
-                })
+                }
             case .failure(let error):
                 self.showUIAlert(error: error)
             }
@@ -102,10 +136,10 @@ private extension HomeViewController{
 
         // Little trick to remove empty table view cells from the screen, play with removing it.
         tableView.tableFooterView = UIView()
-
-        //TODO: Uncomment this when tapping on cell will be implemented
-        //tableView.delegate = self
-        tableView.dataSource = self
+    }
+    
+    func showNavBar(){
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
 }

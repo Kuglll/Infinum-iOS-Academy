@@ -27,7 +27,9 @@ final class TVShowTableViewCell: UITableViewCell {
 
 extension TVShowTableViewCell {
 
-    func configure(with item: String) {
-        titleLabel.text = item
+    func configure(with item: ShowLocal?) {
+        if let title = item?.title{
+            titleLabel.text = title
+        }
     }
 }

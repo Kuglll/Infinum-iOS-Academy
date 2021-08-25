@@ -66,4 +66,42 @@ class ApiManager {
             }
     }
     
+    func getReviewsForShow(
+        showId: String,
+        authInfo: AuthInfo,
+        handler: @escaping (Result<ReviewResponse, Error>) -> Void
+    ){
+        AF
+            .request(Router.getReviewsForShowId(showId: showId, authInfo: authInfo))
+            .validate()
+            .responseDecodable(of: ReviewResponse.self) { dataResponse in
+                switch dataResponse.result {
+                case .success(let reviewResponse):
+                    handler(.success(reviewResponse))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+            }
+    }
+    
+    func postReview(
+        comment: String,
+        rating: Int,
+        showId: Int,
+        authInfo: AuthInfo,
+        handler: @escaping (Result<Data?, Error>) -> Void
+    ){
+        AF
+            .request(Router.postReview(comment: comment, rating: rating, showId: showId, authInfo: authInfo))
+            .validate()
+            .response{ dataResponse in
+                switch dataResponse.result {
+                case .success(let response):
+                    handler(.success(response))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+            }
+    }
+    
 }
