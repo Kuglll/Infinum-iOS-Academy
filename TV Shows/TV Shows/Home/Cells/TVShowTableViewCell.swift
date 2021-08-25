@@ -31,8 +31,8 @@ final class TVShowTableViewCell: UITableViewCell {
 extension TVShowTableViewCell {
 
     func configure(with item: ShowLocal?) {
-        if let unwrappedTitle = item?.title{
-            titleLabel.text = unwrappedTitle
+        if let title = item?.title{
+            titleLabel.text = title
         }
         if let unwrappedImageUrl = item?.imageUrl{
             showImageView.kf.setImage(with: unwrappedImageUrl, placeholder: UIImage(named: "ic-show-placeholder-vertical"))

@@ -10,11 +10,20 @@ import Foundation
 
 struct Show: Decodable {
     let id: String
-    let average_rating: Int?
+    let averageRating: Int?
     let description: String?
-    let image_url: URL?
-    let no_of_reviews: Int
+    let imageUrl: URL
+    let numOfReviews: Int
     let title: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case averageRating = "average_rating"
+        case description
+        case imageUrl = "image_url"
+        case numOfReviews = "no_of_reviews"
+        case title
+    }
 }
 
 struct ShowsResponse: Decodable {

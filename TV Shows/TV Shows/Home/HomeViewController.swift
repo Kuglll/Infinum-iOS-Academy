@@ -75,17 +75,16 @@ extension HomeViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
         let item = shows[indexPath.row]
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "ShowDetailsStoryboard", bundle:nil)
+        let storyBoard = UIStoryboard(name: "ShowDetailsStoryboard", bundle:nil)
         let showDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
         
         guard
-            let unwrappedShowId = item?.id,
-            let unwrappedAuthInfo = authInfo
+            let authInfo = authInfo
         else {
             return
         }
         showDetailsViewController.setShow(show: item)
-        showDetailsViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
+        showDetailsViewController.setAuthInfo(authInfo: authInfo)
         
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
@@ -120,19 +119,19 @@ private extension HomeViewController{
             switch result{
             case .success(let showsResponse):
                 self.shows = []
-                showsResponse.shows.forEach({ show in
+                showsResponse.shows.forEach{ show in
                     self.shows.append(
                         ShowLocal(
                             id: show.id,
-                            averageRating: show.average_rating,
+                            averageRating: show.averageRating,
                             description: show.description,
-                            imageUrl: show.image_url,
-                            numberOfReviews: show.no_of_reviews,
+                            imageUrl: show.imageUrl,
+                            numberOfReviews: show.numOfReviews,
                             title: show.title
                         )
                     )
                     self.tableView.reloadData()
-                })
+                }
             case .failure(let error):
                 self.showUIAlert(error: error)
             }

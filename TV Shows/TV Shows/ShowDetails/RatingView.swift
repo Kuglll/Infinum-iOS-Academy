@@ -23,7 +23,7 @@ class RatingView: UIView {
     // Sets the rating - value from 0 to 5, inclusive
     // it will get clamped if out of bounds
     var rating: Int {
-        get { currentSelectedRating() }
+        get { currentSelectedRating }
         set { setRating(newValue) }
     }
 
@@ -133,7 +133,7 @@ private extension RatingView {
             }
     }
 
-    func currentSelectedRating() -> Int {
+    var currentSelectedRating: Int {
         let lastSelectedIndex = ratingButtons
             .lastIndex(where: \.isSelected)
             .flatMap { $0 + 1 } // 0 -> 1

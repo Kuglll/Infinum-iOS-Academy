@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 import SVProgressHUD
 
-class ShowDetailsViewController : UIViewController{
+class ShowDetailsViewController : UIViewController {
     
     var show: ShowLocal? = nil
     var authInfo: AuthInfo? = nil
     
-    private var reviews: [Review?] = [nil]
+    private var reviews: [Review?] = []
     
     @IBOutlet weak var showDetailsTableView: UITableView!
     
@@ -42,7 +42,7 @@ class ShowDetailsViewController : UIViewController{
 extension ShowDetailsViewController: ReviewWrittenDelegate {
 
     func reviewWritten() {
-        reviews = [nil]
+        reviews = []
         getReviews()
     }
 }
@@ -70,15 +70,15 @@ extension ShowDetailsViewController: UITableViewDataSource {
 
 // MARK: - Private methods
 
-private extension ShowDetailsViewController{
+private extension ShowDetailsViewController {
     
-    func setupNavBar(){
+    func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.view.backgroundColor = UIColor.white
         self.title = show?.title
     }
     
-    func makeShowDetailsHeaderCell(from tableView: UITableView) -> ShowDetailsHeaderCell{
+    func makeShowDetailsHeaderCell(from tableView: UITableView) -> ShowDetailsHeaderCell {
         
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ShowDetailsHeaderCell.self)
@@ -87,7 +87,7 @@ private extension ShowDetailsViewController{
         return cell
     }
     
-    func makeReviewCell(from tableView: UITableView, index: Int) -> ReviewCell{
+    func makeReviewCell(from tableView: UITableView, index: Int) -> ReviewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ReviewCell.self)
         ) as! ReviewCell
@@ -107,7 +107,7 @@ private extension ShowDetailsViewController{
         showDetailsTableView.tableFooterView = UIView()
     }
     
-    func setupTableViewFooter(){
+    func setupTableViewFooter() {
         let footerView = UIView(frame: CGRect(x: 0,
                                               y: 0,
                                               width: showDetailsTableView.frame.width-40,
@@ -123,7 +123,7 @@ private extension ShowDetailsViewController{
         showDetailsTableView.tableFooterView = footerView
     }
     
-    func getReviews(){
+    func getReviews() {
         guard
             let unwrappedAuthInfo = authInfo,
             let unwrappedShowId = show?.id
@@ -149,30 +149,30 @@ private extension ShowDetailsViewController{
         }
     }
     
-    func showUIAlert(error: Error){
+    func showUIAlert(error: Error) {
         let alertController = UIAlertController(title: "An error has occured", message: "Error: \(error)", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default)
         alertController.addAction(OKAction)
 
-        self.present(alertController, animated: true)
+        present(alertController, animated: true)
     }
     
-    @objc func navigateToWriteReview(){
+    @objc func navigateToWriteReview() {
         let storyBoard : UIStoryboard = UIStoryboard(name: "WriteReviewStoryboard", bundle:nil)
         let writeReviewViewController = storyBoard.instantiateViewController(withIdentifier: "WriteReviewViewController") as! WriteReviewViewController
         
         guard
-            let unwrappedAuthInfo = authInfo,
-            let unwrappedShowId = show?.id
+            let authInfo = authInfo,
+            let showId = show?.id
         else {
             return
         }
-        writeReviewViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
-        writeReviewViewController.setShowId(showId: unwrappedShowId)
+        writeReviewViewController.setAuthInfo(authInfo: authInfo)
+        writeReviewViewController.setShowId(showId: showId)
         writeReviewViewController.delegate = self
         let navigationController = UINavigationController(rootViewController:writeReviewViewController)
         
-        self.present(navigationController, animated: true, completion: nil)
+        present(navigationController, animated: true, completion: nil)
     }
     
 }

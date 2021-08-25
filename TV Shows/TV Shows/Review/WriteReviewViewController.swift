@@ -9,20 +9,20 @@ import Foundation
 import UIKit
 import SVProgressHUD
 
-protocol ReviewWrittenDelegate: AnyObject{
+protocol ReviewWrittenDelegate: AnyObject {
     func reviewWritten()
 }
 
-class WriteReviewViewController: UIViewController{
+class WriteReviewViewController: UIViewController {
     
     var authInfo: AuthInfo? = nil
     var showId: String? = nil
     
     weak var delegate: ReviewWrittenDelegate?
     
-    @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var commentTextField: UITextField!
-    @IBOutlet weak var ratingView: RatingView!
+    @IBOutlet private weak var submitButton: UIButton!
+    @IBOutlet private weak var commentTextField: UITextField!
+    @IBOutlet private weak var ratingView: RatingView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,29 +43,29 @@ class WriteReviewViewController: UIViewController{
 
 // MARK: - IBActions
 
-private extension WriteReviewViewController{
+private extension WriteReviewViewController {
     
     @IBAction func submitButtonActionHandler(_ sender: Any) {
         guard
-            let unwrappedShowId = showId,
-            let unwrappedShowIdInt = Int(unwrappedShowId),
-            let unwrappedAuthInfo = authInfo
+            let showId = showId,
+            let showIdInt = Int(showId),
+            let authInfo = authInfo
         else {
             return
         }
         ApiManager.instance.postReview(
             comment: commentTextField.text ?? "",
             rating: ratingView.rating,
-            showId: unwrappedShowIdInt,
-            authInfo: unwrappedAuthInfo
-        ){ [weak self] result in
+            showId: showIdInt,
+            authInfo: authInfo
+        ) { [weak self] result in
             SVProgressHUD.dismiss()
             guard let self = self else { return }
             
             switch result{
             case .success(_):
                 self.delegate?.reviewWritten()
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true)
             case .failure(let error):
                 self.showUIAlert(error: error)
             }
@@ -76,13 +76,13 @@ private extension WriteReviewViewController{
 
 // MARK: - Private methods
 
-private extension WriteReviewViewController{
+private extension WriteReviewViewController {
     
     @objc func didSelectClose() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
-    func setupNavBar(){
+    func setupNavBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Close",
             style: .plain,
@@ -93,12 +93,12 @@ private extension WriteReviewViewController{
         navigationItem.title = "Write a Review"
     }
     
-    func showUIAlert(error: Error){
+    func showUIAlert(error: Error) {
         let alertController = UIAlertController(title: "An error has occured", message: "Error: \(error)", preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default)
-        alertController.addAction(OKAction)
+        let oKAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(oKAction)
 
-        self.present(alertController, animated: true)
+        present(alertController, animated: true)
     }
     
 }

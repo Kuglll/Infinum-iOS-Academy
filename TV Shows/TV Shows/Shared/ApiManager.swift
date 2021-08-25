@@ -69,12 +69,12 @@ class ApiManager {
     func getReviewsForShow(
         showId: String,
         authInfo: AuthInfo,
-        handler: @escaping (Result<(ReviewResponse), Error>) -> Void
+        handler: @escaping (Result<ReviewResponse, Error>) -> Void
     ){
         AF
             .request(Router.getReviewsForShowId(showId: showId, authInfo: authInfo))
             .validate()
-            .responseDecodable(of: ReviewResponse.self){ dataResponse in
+            .responseDecodable(of: ReviewResponse.self) { dataResponse in
                 switch dataResponse.result {
                 case .success(let reviewResponse):
                     handler(.success(reviewResponse))
@@ -89,7 +89,7 @@ class ApiManager {
         rating: Int,
         showId: Int,
         authInfo: AuthInfo,
-        handler: @escaping (Result<(Data?), Error>) -> Void
+        handler: @escaping (Result<Data?, Error>) -> Void
     ){
         AF
             .request(Router.postReview(comment: comment, rating: rating, showId: showId, authInfo: authInfo))
