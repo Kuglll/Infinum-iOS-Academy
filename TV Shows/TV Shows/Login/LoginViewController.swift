@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     
     private var userResponse: UserResponse? = nil
+    private var authInfo: AuthInfo? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +67,10 @@ private extension LoginViewController {
                 switch result{
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
-                    print("Headers: \(tuple.1)")
+                    self.storeAuthInfo(headers: tuple.1)
                     self.navigateToHome()
                 case .failure(let error):
-                    self.showError(error: error.localizedDescription)
+                    self.showUIAlert(error: error)
                 }
             }
         )
@@ -95,10 +96,10 @@ private extension LoginViewController {
                 switch result{
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
-                    print("Headers: \(tuple.1)")
+                    self.storeAuthInfo(headers: tuple.1)
                     self.navigateToHome()
                 case .failure(let error):
-                    self.showError(error: error.localizedDescription)
+                    self.showUIAlert(error: error)
                 }
             }
         )
@@ -154,17 +155,30 @@ private extension LoginViewController {
         loginButton.clipsToBounds = true
     }
     
-    private func storeUser(user: UserResponse){
+    func storeUser(user: UserResponse){
         userResponse = user
     }
     
-    private func showError(error: String){
-        print("API/Serialization failure: \(error)")
+    func storeAuthInfo(headers: [String: String]){
+        guard let authInfo = try? AuthInfo(headers: headers) else {
+            SVProgressHUD.showError(withStatus: "Missing headers")
+            return
+        }
+        self.authInfo = authInfo
     }
     
-    private func navigateToHome(){
+    func navigateToHome(){
         let storyBoard : UIStoryboard = UIStoryboard(name: "HomeStoryboard", bundle:nil)
-        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        guard
+            let unwrappedUserResponse = userResponse,
+            let unwrappedAuthInfo = authInfo
+        else {
+            return
+        }
+        homeViewController.setUserResponse(userResponse: unwrappedUserResponse)
+        homeViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
 
@@ -176,7 +190,14 @@ private extension LoginViewController {
     func setupPasswordIcon(){
         togglePasswordIcon.setImage(UIImage(named: "PasswordVisible"), for: .selected)
         togglePasswordIcon.setImage(UIImage(named: "PasswordInvisible"), for: .normal)
+    }
+    
+    func showUIAlert(error: Error){
+        let alertController = UIAlertController(title: "An error has occured", message: "Error: \(error)", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(OKAction)
 
+        self.present(alertController, animated: true)
     }
     
 }
