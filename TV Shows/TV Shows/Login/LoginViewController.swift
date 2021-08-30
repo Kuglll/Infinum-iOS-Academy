@@ -68,9 +68,11 @@ private extension LoginViewController {
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
                     self.storeAuthInfo(headers: tuple.1)
+                    self.checkForRememberMeAndStoreAuthInfo()
                     self.navigateToHome()
                 case .failure(let error):
                     self.showUIAlert(error: error)
+                    self.animateUsernameAndPasswordTextFields()
                 }
             }
         )
@@ -97,9 +99,11 @@ private extension LoginViewController {
                 case .success(let tuple):
                     self.storeUser(user: tuple.0)
                     self.storeAuthInfo(headers: tuple.1)
+                    self.checkForRememberMeAndStoreAuthInfo()
                     self.navigateToHome()
                 case .failure(let error):
                     self.showUIAlert(error: error)
+                    self.animateUsernameAndPasswordTextFields()
                 }
             }
         )
@@ -198,6 +202,33 @@ private extension LoginViewController {
         alertController.addAction(OKAction)
 
         self.present(alertController, animated: true)
+    }
+    
+    func animateUsernameAndPasswordTextFields(){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: usernameTextField.center.x - 10, y: usernameTextField.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: usernameTextField.center.x + 10, y: usernameTextField.center.y))
+
+        usernameTextField.layer.add(animation, forKey: "position")
+        
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x - 10, y: passwordTextField.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x + 10, y: passwordTextField.center.y))
+        passwordTextField.layer.add(animation, forKey: "position")
+    }
+    
+    func checkForRememberMeAndStoreAuthInfo(){
+        guard rememberMeButton.isSelected else {
+            return
+        }
+        if let unwrappedAuthInfo = authInfo{
+            let encoder = PropertyListEncoder()
+            if let encoded = try? encoder.encode(unwrappedAuthInfo) {
+                UserDefaults.standard.set(encoded, forKey: Constants.authInfo)
+            }
+        }
     }
     
 }

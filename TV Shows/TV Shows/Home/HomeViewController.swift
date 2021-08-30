@@ -13,6 +13,7 @@ class HomeViewController : UIViewController{
  
     var userResponse: UserResponse? = nil
     var authInfo: AuthInfo? = nil
+    var notificationToken: NSObjectProtocol?
     
     private var shows: [ShowLocal?] = [nil]
     
@@ -24,6 +25,12 @@ class HomeViewController : UIViewController{
         getShowsList()
         setupTableView()
         showNavBar()
+        setupRightNavigationAction()
+        addLogoutObserver()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(notificationToken!)
     }
     
     func setUserResponse(userResponse: UserResponse){
@@ -111,6 +118,7 @@ private extension HomeViewController{
             
             switch result{
             case .success(let showsResponse):
+                self.shows = []
                 showsResponse.shows.forEach{ show in
                     self.shows.append(
                         ShowLocal(
@@ -140,6 +148,40 @@ private extension HomeViewController{
     
     func showNavBar(){
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func setupRightNavigationAction(){
+        let profileImage = UIImage(named: "ic-profile")?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: profileImage, style: .plain, target: self, action: #selector(navigateToProfileDetails))
+
+    }
+    
+    @objc func navigateToProfileDetails(){
+        let storyBoard = UIStoryboard(name: "ProfileDetailsStoryboard", bundle:nil)
+        let profileDetailsViewController = storyBoard.instantiateViewController(withIdentifier: "ProfileDetailsViewController") as! ProfileDetailsViewController
+        
+        guard
+            let unwrappedAuthInfo = authInfo
+        else {
+            return
+        }
+        profileDetailsViewController.setAuthInfo(authInfo: unwrappedAuthInfo)
+        
+        let navigationController = UINavigationController(rootViewController: profileDetailsViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
+    func addLogoutObserver(){
+        notificationToken = NotificationCenter
+            .default
+            .addObserver(forName: NotificationDidLogout, object: nil, queue: nil, using: { [weak self] _ in
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Login", bundle:nil)
+                let loginViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                
+                self?.navigationController?.setNavigationBarHidden(true, animated: false)
+                self?.navigationController?.setViewControllers([loginViewController], animated: true)
+            })
     }
     
 }

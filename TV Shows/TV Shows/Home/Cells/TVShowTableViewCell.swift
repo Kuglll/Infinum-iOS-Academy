@@ -7,18 +7,21 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 final class TVShowTableViewCell: UITableViewCell {
 
     // MARK: - Private UI
     @IBOutlet weak var titleLabel: UILabel!
-
+    @IBOutlet weak var showImageView: UIImageView!
+    
     
     // MARK: - Lifecycle
     override func prepareForReuse() {
         super.prepareForReuse()
 
         titleLabel.text = nil
+        showImageView.image = nil
     }
 
 }
@@ -30,6 +33,9 @@ extension TVShowTableViewCell {
     func configure(with item: ShowLocal?) {
         if let title = item?.title{
             titleLabel.text = title
+        }
+        if let unwrappedImageUrl = item?.imageUrl {
+            showImageView.kf.setImage(with: unwrappedImageUrl, placeholder: UIImage(named: "ic-show-placeholder-vertical"))
         }
     }
 }

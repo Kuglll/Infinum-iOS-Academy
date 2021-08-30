@@ -19,6 +19,8 @@
 		8E50F46A26B5ECA20064C68D /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50F46926B5ECA20064C68D /* Review.swift */; };
 		8E50F46D26B601B30064C68D /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50F46C26B601B30064C68D /* WriteReviewViewController.swift */; };
 		8E50F46F26B601C20064C68D /* WriteReviewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E50F46E26B601C20064C68D /* WriteReviewStoryboard.storyboard */; };
+		8E50F47226B848E90064C68D /* ProfileDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E50F47126B848E90064C68D /* ProfileDetailsViewController.swift */; };
+		8E50F47426B848F40064C68D /* ProfileDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E50F47326B848F40064C68D /* ProfileDetailsStoryboard.storyboard */; };
 		8EA3C05C26975F400042CB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA3C05B26975F400042CB93 /* AppDelegate.swift */; };
 		8EA3C06526975F450042CB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EA3C06426975F450042CB93 /* Assets.xcassets */; };
 		8EA3C06826975F450042CB93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EA3C06626975F450042CB93 /* LaunchScreen.storyboard */; };
@@ -46,6 +48,8 @@
 		8E50F46926B5ECA20064C68D /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		8E50F46C26B601B30064C68D /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
 		8E50F46E26B601C20064C68D /* WriteReviewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteReviewStoryboard.storyboard; sourceTree = "<group>"; };
+		8E50F47126B848E90064C68D /* ProfileDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailsViewController.swift; sourceTree = "<group>"; };
+		8E50F47326B848F40064C68D /* ProfileDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		8EA3C05826975F400042CB93 /* TV Shows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TV Shows.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EA3C05B26975F400042CB93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EA3C06426975F450042CB93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,6 +133,15 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
+		8E50F47026B848D00064C68D /* ProfileDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8E50F47126B848E90064C68D /* ProfileDetailsViewController.swift */,
+				8E50F47326B848F40064C68D /* ProfileDetailsStoryboard.storyboard */,
+			);
+			path = ProfileDetails;
+			sourceTree = "<group>";
+		};
 		8EA3C04F26975F400042CB93 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +163,7 @@
 		8EA3C05A26975F400042CB93 /* TV Shows */ = {
 			isa = PBXGroup;
 			children = (
+				8E50F47026B848D00064C68D /* ProfileDetails */,
 				8E50F46B26B6019A0064C68D /* Review */,
 				8E50F45D26B54C750064C68D /* ShowDetails */,
 				8ECADDEE26A4B3EF008831CE /* Shared */,
@@ -251,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E50F47426B848F40064C68D /* ProfileDetailsStoryboard.storyboard in Resources */,
 				8E50F46326B54FF90064C68D /* ShowDetailsStoryboard.storyboard in Resources */,
 				8E2A96A22698DE2100E33063 /* Login.storyboard in Resources */,
 				8EA3C06826975F450042CB93 /* LaunchScreen.storyboard in Resources */,
@@ -324,6 +339,7 @@
 				8E50F46826B582480064C68D /* ReviewCell.swift in Sources */,
 				8E50F45926B4909D0064C68D /* Show.swift in Sources */,
 				8ECADDE926A48612008831CE /* HomeViewController.swift in Sources */,
+				8E50F47226B848E90064C68D /* ProfileDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

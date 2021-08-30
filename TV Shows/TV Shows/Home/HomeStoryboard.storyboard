@@ -21,25 +21,38 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TVShowTableViewCell" id="5oL-Ao-FPe" customClass="TVShowTableViewCell" customModule="TV_Shows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TVShowTableViewCell" rowHeight="120" id="5oL-Ao-FPe" customClass="TVShowTableViewCell" customModule="TV_Shows" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5oL-Ao-FPe" id="HBn-EV-b00">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3o8-6X-WyJ">
-                                                    <rect key="frame" x="40" y="11" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3o8-6X-WyJ">
+                                                    <rect key="frame" x="125" y="50" width="249" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JcJ-Cf-taq">
+                                                    <rect key="frame" x="40" y="21" width="65" height="78"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="65" id="26T-zs-06m"/>
+                                                        <constraint firstAttribute="height" constant="78" id="2WJ-bF-oBh"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="3o8-6X-WyJ" firstAttribute="leading" secondItem="HBn-EV-b00" secondAttribute="leadingMargin" constant="20" id="saf-tO-Kvb"/>
+                                                <constraint firstItem="3o8-6X-WyJ" firstAttribute="top" secondItem="HBn-EV-b00" secondAttribute="top" constant="50" id="6Yl-IX-8gH"/>
+                                                <constraint firstItem="JcJ-Cf-taq" firstAttribute="top" secondItem="HBn-EV-b00" secondAttribute="topMargin" constant="10" id="8o3-F8-Pk5"/>
+                                                <constraint firstItem="JcJ-Cf-taq" firstAttribute="leading" secondItem="HBn-EV-b00" secondAttribute="leadingMargin" constant="20" id="IgG-P6-YrP"/>
+                                                <constraint firstItem="3o8-6X-WyJ" firstAttribute="leading" secondItem="JcJ-Cf-taq" secondAttribute="trailing" constant="20" id="XJc-d1-u06"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="JcJ-Cf-taq" secondAttribute="bottom" constant="10" id="b3s-nf-eVd"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3o8-6X-WyJ" secondAttribute="trailing" constant="20" id="fdM-uY-IbS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="showImageView" destination="JcJ-Cf-taq" id="Qrr-R5-qzW"/>
                                             <outlet property="titleLabel" destination="3o8-6X-WyJ" id="i7W-Tr-aOn"/>
                                         </connections>
                                     </tableViewCell>
@@ -65,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="139"/>
+            <point key="canvasLocation" x="73.913043478260875" y="138.61607142857142"/>
         </scene>
     </scenes>
     <resources>

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 final class ShowDetailsHeaderCell: UITableViewCell {
 
@@ -23,6 +24,7 @@ final class ShowDetailsHeaderCell: UITableViewCell {
 
         ratingLabel.text = nil
         showDescriptionLabel.text = nil
+        showImageView.image = nil
     }
     
     override func awakeFromNib() {
@@ -42,11 +44,14 @@ extension ShowDetailsHeaderCell {
         showImageView.image = UIImage(named: "showImagePlaceholder")
         if let numberOfReviews = show?.numberOfReviews,
            let averageRating = show?.averageRating {
-            
             ratingLabel.text = "\(numberOfReviews) REVIEWS, \(averageRating) AVERAGE"
         }
         showDescriptionLabel.text = show?.description
         ratingView.setRoundedRating(Double(show?.averageRating ?? 0))
+        
+        if let unwrappedShowImageUrl = show?.imageUrl{
+            showImageView.kf.setImage(with: unwrappedShowImageUrl, placeholder: UIImage(named: "ic-show-placeholder-rectangle"))
+        }
     }
     
     func configureImageView(){

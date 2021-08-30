@@ -13,4 +13,6 @@ enum Constants {
         static let baseUrl = "https://tv-shows.infinum.academy"
     }
     
+    static let authInfo = "authInfo"
+    
 }
